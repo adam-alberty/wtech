@@ -1,3 +1,5 @@
+@include('components.email-deals')
+
 <footer class="px-8">
     <div class="max-w-screen-2xl mx-auto py-20">
         <div class="grid grid-cols-5 items-start gap-30 font-semibold">

@@ -1,4 +1,4 @@
-<header>
+<header class="px-8">
     <div class="mx-auto max-w-screen-2xl py-3 grid grid-cols-[1fr_auto_1fr] items-center">
         <a href="{{ route('home') }}">
             <img src="/assets/logo.png" alt="">
