@@ -6,11 +6,11 @@
         </a>
 
         <div class="shrink-0 grow w-full">
-            <nav class="font-semibold flex gap-7">
-                <a href="/men">Men</a>
-                <a href="/men">Women</a>
-                <a href="/men">Kids</a>
-
+            <nav class="font-semibold flex gap-5">
+                <a href="/c/featured" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">New & Featured</a>
+                <a href="/c/men" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Men</a>
+                <a href="/c/women" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Women</a>
+                <a href="/c/kids" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Kids</a>
             </nav>
         </div>
 
@@ -18,13 +18,13 @@
             @include('components.search')
 
             <nav class="flex items-center gap-3">
-                <a href="/cart" class="p-2 rounded-full hover:bg-muted focus:bg-muted transition-all">
-                    <x-phosphor-user class="w-6 h-6" />
+                <a href="/login" class="p-2 rounded-full hover:bg-input focus:bg-input">
+                    <x-phosphor-user class="w-5 h-5" />
                     <span class="sr-only">Go to my profile</span>
                 </a>
 
-                <a href="/cart" class="p-2 rounded-full hover:bg-muted focus:bg-muted transition-all">
-                    <x-phosphor-shopping-bag-light class="w-7 h-7" />
+                <a href="/cart" class="p-2 rounded-full hover:bg-input focus:bg-input">
+                    <x-phosphor-shopping-bag-light class="w-6 h-6" />
                     <span class="sr-only">Go to shopping cart</span>
                 </a>
             </nav>

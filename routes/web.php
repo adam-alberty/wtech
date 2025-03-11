@@ -81,3 +81,12 @@ Route::get('/product/{id}', function () {
 
     return view('product')->with('product', $product);
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+
+Route::get('/register', function () {
+    return view('register');
+});

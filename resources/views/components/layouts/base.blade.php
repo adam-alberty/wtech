@@ -18,9 +18,7 @@
 </head>
 
 <body class="bg-background text-foreground">
-    @include('components.header')
-    @yield('content')
-    @include('components.footer')
+    {{ $slot }}
 </body>
 
 </html>

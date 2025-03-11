@@ -16,13 +16,13 @@
     --color-card-foreground: hsl(240 10% 3.9%);
     --color-popover: hsl(0 0% 100%);
     --color-popover-foreground: hsl(240 10% 3.9%);
-    --color-primary: #E52E7E;
+    --color-primary: #000;
     --color-primary-foreground: hsl(0 0% 98%);
     --color-secondary: hsl(240 4.8% 95.9%);
     --color-secondary-foreground: hsl(240 5.9% 10%);
     --color-muted: hsl(240 4.8% 95.9%);
     --color-muted-foreground: hsl(240 3.8% 46.1%);
-    --color-accent: hsl(240 4.8% 95.9%);
+    --color-accent: #E52E7E;
     --color-accent-foreground: hsl(240 5.9% 10%);
     --color-destructive: 0 84.2% 60.2%;
     --color-destructive-foreground: hsl(0 0% 98%);
