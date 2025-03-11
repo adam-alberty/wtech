@@ -8,13 +8,13 @@
 
                 <div class="col-span-2">
                     <h2 class="text-2xl font-semibold">Nike Air Force 1 Max</h2>
-                    <div class="text-muted-foreground text-lg mt-1">Men's running shoes</div>
+                    <div class="text-muted-foreground text-lg">Men's running shoes</div>
                     <div class="text-lg font-semibold mt-4">
                         193,99€
                     </div>
                     <button class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-5">Add to
                         cart</button>
-                    <p class="mt-5 mb-10 text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    <p class="mt-10 font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Ea
                         ipsam
                         necessitatibus

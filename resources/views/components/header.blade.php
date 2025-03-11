@@ -7,11 +7,11 @@
 
         <div class="shrink-0 grow w-full">
             <nav class="font-semibold flex gap-5">
-                <a href="/c/featured" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">New &
+                <a href="/c/featured" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">New &
                     Featured</a>
-                <a href="/c/men" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Men</a>
-                <a href="/c/women" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Women</a>
-                <a href="/c/kids" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Kids</a>
+                <a href="/c/men" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">Men</a>
+                <a href="/c/women" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">Women</a>
+                <a href="/c/kids" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">Kids</a>
             </nav>
         </div>
 

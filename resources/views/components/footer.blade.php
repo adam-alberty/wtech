@@ -29,7 +29,8 @@
             </div>
         </div>
 
-        <p class="mt-20 text-muted-foreground font-semibold">&copy; {{ \Carbon\Carbon::now()->format('Y') }} WTECH WEAR.
+        <p class="mt-20 text-muted-foreground font-semibold">&copy; {{ \Carbon\Carbon::now()->format('Y') }}
+            {{ config('app.name') }}.
             All rights reserved</p>
     </div>
 </footer>
