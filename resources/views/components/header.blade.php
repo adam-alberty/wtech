@@ -1,13 +1,14 @@
 <header class="px-8">
-    <div class="mx-auto max-w-screen-2xl py-3 grid grid-cols-[1fr_auto_1fr] items-center">
-        <a href="{{ route('home') }}">
+    <div class="mx-auto max-w-screen-3xl py-3 grid grid-cols-[1fr_auto_1fr] items-center">
+        <a href="{{ route('home') }}" class="w-[200px]">
             <img src="/assets/logo.png" alt="">
             <h1 class="sr-only">WTECH Eshop</h1>
         </a>
 
         <div class="shrink-0 grow w-full">
             <nav class="font-semibold flex gap-5">
-                <a href="/c/featured" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">New & Featured</a>
+                <a href="/c/featured" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">New &
+                    Featured</a>
                 <a href="/c/men" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Men</a>
                 <a href="/c/women" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Women</a>
                 <a href="/c/kids" class="hover:underline underline-offset-4 decoration-2 px-3 py-2">Kids</a>

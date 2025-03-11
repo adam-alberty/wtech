@@ -1,5 +1,5 @@
 <section>
-    <div class="h-[600px] relative">
+    <div class="h-[700px] relative">
         <img src="/assets/banner.jpg" class="object-cover h-full w-full brightness-50" alt="">
 
 

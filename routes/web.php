@@ -90,3 +90,7 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
+
+Route::get('/cart', function () {
+    return view('cart');
+});

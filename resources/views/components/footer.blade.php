@@ -24,7 +24,7 @@
                 <a href="/">Terms of Use</a>
             </section>
 
-            <div class="col-span-2 justify-self-end">
+            <div class="col-span-2 justify-self-end w-[200px]">
                 <img src="/assets/logo.png" alt="">
             </div>
         </div>

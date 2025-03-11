@@ -1,6 +1,4 @@
-@extends('layouts.default')
-
-@section('content')
+<x-layouts.default>
     <div class="px-8">
         <div class="mx-auto max-w-screen-lg mt-10 mb-20">
             <section class="grid grid-cols-5 gap-10">
@@ -16,7 +14,8 @@
                     </div>
                     <button class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-5">Add to
                         cart</button>
-                    <p class="mt-5 mb-10 text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea
+                    <p class="mt-5 mb-10 text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ea
                         ipsam
                         necessitatibus
                         consectetur odit eveniet
@@ -29,4 +28,4 @@
             </section>
         </div>
     </div>
-@stop
+</x-layouts.default>
