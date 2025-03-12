@@ -1,8 +1,8 @@
 <x-layouts.auth>
     <div class="max-w-md mx-auto py-10">
-        <img src="/assets/logo.png" class="mb-10" alt="">
+        <x-logo />
 
-        <h1 class="text-2xl font-semibold mb-10">Register and get deals!</h1>
+        <h1 class="text-2xl font-semibold mt-10 mb-10">Register an account</h1>
 
         <form action="" class="grid gap-2">
             <input type="text" placeholder="Email" class="p-3 rounded-xl border w-full">

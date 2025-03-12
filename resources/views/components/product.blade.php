@@ -1,6 +1,7 @@
-<a href="{{ $product['link'] }}">
+<a href="{{ $product['link'] }}" class="group">
     <div class="aspect-square">
-        <img class="object-cover h-full w-full" src="{{ $product['image'] }}" alt="">
+        <img class="object-cover h-full w-full group-hover:brightness-105 transition-all" src="{{ $product['image'] }}"
+            alt="">
     </div>
     <h3 class="font-semibold mt-5">{{ $product['name'] }}</h3>
     <div class="font-semibold text-muted-foreground">{{ $product['category'] }}</div>

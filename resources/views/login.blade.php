@@ -1,10 +1,9 @@
 <x-layouts.auth>
 
     <div class="max-w-md mx-auto py-10">
+        <x-logo />
 
-        <img src="/assets/logo.png" class="mb-10" alt="">
-
-        <h1 class="text-2xl font-semibold mb-10">Log in</h1>
+        <h1 class="text-2xl font-semibold mt-10 mb-10">Log in</h1>
 
         <form action="" class="grid gap-2">
             <input type="text" placeholder="Email" class="p-3 rounded-xl border w-full">

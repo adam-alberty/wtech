@@ -12,7 +12,16 @@
                     <div class="text-lg font-semibold mt-4">
                         193,99€
                     </div>
-                    <button class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-5">Add to
+
+                    <div class="mt-5">
+                        <div class="font-semibold mb-2">Select size</div>
+
+                        <button class="rounded-xl p-2 px-4 border">
+                            EU 40
+                        </button>
+                    </div>
+
+                    <button class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-10">Add to
                         cart</button>
                     <p class="mt-10 font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Ea
