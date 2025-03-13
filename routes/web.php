@@ -1,96 +1,23 @@
 <?php
 
+require base_path('routes/information.php');
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\InfoController;
 
-Route::get('/', function () {
-    $new_arrivals = [
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-    ];
+Route::get('/', [HomePageController::class, "index"])->name('home');
 
-    $most_popular = [
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
-        [
-            'name' => 'Nike Air Force 1 Max',
-            'image' => '/assets/product-image.jpg',
-            'link' => '/product/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
-        ],
+Route::get('/product/{id}', [ProductController::class, "index"])->name('product');
 
-    ];
-
-    return view('index')->with('new_arrivals', $new_arrivals)->with('most_popular', $most_popular);
-})->name('home');
-
-
-Route::get('/product/{id}', function () {
-    $product = [
-        'name' => 'Nike Air Force 1 Max',
-        'image' => '/assets/product-image.jpg',
-        'link' => '/products/air',
-        'price' => 193.35,
-        'category' => 'Men\'s running shoes',
-    ];
-
-    return view('product')->with('product', $product);
-});
+Route::get('/cart', [ShoppingCartController::class, "index"])->name('cart');
 
 Route::get('/login', function () {
     return view('login');
 });
 
-
 Route::get('/register', function () {
     return view('register');
-});
-
-Route::get('/cart', function () {
-    return view('cart');
 });

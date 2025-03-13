@@ -24,7 +24,7 @@
                     <span class="sr-only">Go to my profile</span>
                 </a>
 
-                <a href="/cart" class="p-2 rounded-full hover:bg-input focus:bg-input">
+                <a href="{{ route('cart') }}" class="p-2 rounded-full hover:bg-input focus:bg-input">
                     <x-phosphor-shopping-bag-light class="w-6 h-6" />
                     <span class="sr-only">Go to shopping cart</span>
                 </a>
