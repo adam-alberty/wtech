@@ -14,7 +14,7 @@
                 <h2 class="mb-5 text-foreground">Help</h2>
                 <a href="{{ route('returns') }}">Returns</a>
                 <a href="{{ route('shipping_and_delivery') }}">Shipping and Delivery</a>
-                <a href="/">Order status</a>
+{{--                <a href="/">Order status</a>--}}
                 <a href="{{ route('contact') }}">Contact Us</a>
             </section>
 
