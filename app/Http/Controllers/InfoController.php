@@ -7,44 +7,22 @@ use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
-    public function about(): View
+    public function get_order_status(Request $request): View
     {
-        return view('info.about');
-    }
+        $orderNumber = $request->input('order_number');
+        $email = $request->input('email');
 
+        $order = [
+            'order_number' => $orderNumber,
+            'full_name' => 'Name Surname',
+            'status' => 'Pending', // Pending, Processing, Shipped, Delivered, Canceled, Refunded
+        ];
+        return view('info.order_status', compact('order'));
+    }
     public function news(): View
     {
         return view('info.news');
     }
 
-    public function career(): View
-    {
-        return view('info.career');
-    }
-
-    public function returns(): View
-    {
-        return view('info.returns');
-    }
-
-    public function shipping_and_delivery(): View
-    {
-        return view('info.shipping_and_delivery');
-    }
-
-    public function contact(): View
-    {
-        return view('info.contact');
-    }
-
-    public function privacy_policy(): View
-    {
-        return view('info.privacy_policy');
-    }
-
-    public function terms_of_use(): View
-    {
-        return view('info.terms_of_use');
-    }
 
 }
