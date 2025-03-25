@@ -7,7 +7,7 @@
         </p>
         <form action="" class="flex mt-10 gap-3">
             <input type="text"
-                class="bg-primary-foreground focus:bg-white rounded-full p-3 w-80 text-black outline-none"
+                class="bg-primary-foreground focus:bg-white rounded-full p-3 px-5 w-80 text-black outline-none"
                 placeholder="Your email">
             <button type="submit" class="bg-primary-foreground text-primary rounded-full px-4">Get deals</button>
         </form>

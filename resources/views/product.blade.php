@@ -14,11 +14,52 @@
                     </div>
 
                     <div class="mt-5">
+                        <div class="font-semibold mb-2">Select variant</div>
+
+                        <div class="flex flex-wrap gap-2">
+                            <button class="w-14 h-14 border-2 border-primary rounded-xl bg-green-400">
+                            </button>
+                            <button class="w-14 h-14 border-2 border-transparent border-primary rounded-xl bg-blue-400">
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5">
                         <div class="font-semibold mb-2">Select size</div>
 
-                        <button class="rounded-xl p-2 px-4 border">
-                            EU 40
-                        </button>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 38
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 38.5
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 38.5
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 39
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 39.5
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 40
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 40.5
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 41
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 41.5
+                            </button>
+                            <button class="rounded-xl p-2 px-4 border">
+                                EU 40
+                            </button>
+                        </div>
                     </div>
 
                     <button class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-10">Add to

@@ -5,5 +5,5 @@
     </div>
     <h3 class="font-semibold mt-5">{{ $product['name'] }}</h3>
     <div class="font-semibold text-muted-foreground">{{ $product['category'] }}</div>
-    <div class="font-semibold mt-2">{{ $product['price'] }}€</div>
+    <div class="font-semibold mt-2">{{ number_format($product['price'] / 100, 2, '.', ' ') }} €</div>
 </a>

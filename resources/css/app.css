@@ -41,9 +41,11 @@
 }
 
 .line-height {
-  line-height: 1.5;
+    line-height: 1.5;
 }
 
-* {
-    border-color: var(--color-border);
+@layer base {
+    * {
+        @apply border-border;
+    }
 }
