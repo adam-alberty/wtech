@@ -11,19 +11,18 @@ class CheckoutController extends Controller
 
         if (request()->has('step')) {
             $step = request()->query('step');
-
             switch ($step) {
                 case "1":
-                    return view('cart', ['step' => 1]);
+                    return view('cart');
                 case "2":
-                    return view('delivery', ['step' => 2]);
+                    return view('delivery');
                 case "3":
-                    return view('payment', ['step' => 3]);
+                    return view('payment');
                 default:
-                    return view('cart', ['step' => 1]);
+                    return redirect()->to(request()->url());
             };
         } else {
-            return view('cart', ['step' => 1]);
+            return view('cart');
         }
     }
 }
