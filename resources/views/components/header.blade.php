@@ -6,12 +6,17 @@
         </a>
 
         <div class="shrink-0 grow w-full">
-            <nav class="font-semibold flex gap-5">
-                <a href="/c/featured" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">New &
+            <nav class="font-semibold flex group">
+                <a href="/c/featured"
+                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">New
+                    &
                     Featured</a>
-                <a href="/c/men" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">Men</a>
-                <a href="/c/women" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">Women</a>
-                <a href="/c/kids" class="hover:underline underline-offset-8 decoration-1 px-3 py-2">Kids</a>
+                <a href="/c/men"
+                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Men</a>
+                <a href="/c/women"
+                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Women</a>
+                <a href="/c/kids"
+                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Kids</a>
             </nav>
         </div>
 
