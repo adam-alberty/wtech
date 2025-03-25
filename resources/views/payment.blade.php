@@ -1,5 +1,5 @@
 <x-layouts.default>
-    <x-layouts.checkout :step="1">
+    <x-layouts.checkout :step="3">
         <div class="col-span-2">
             <h2 class="text-2xl font-semibold mb-10">Cart</h2>
 

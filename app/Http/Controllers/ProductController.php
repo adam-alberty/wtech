@@ -34,11 +34,11 @@ These **Stylish Leather Sneakers** are the perfect blend of comfort and style. D
 ---
 EOD;
         $product = [
-            'name' => 'Nike Air Force 1 Max',
+            'name' => 'Nike Air Force 1',
             'image' => '/assets/product-image.jpg',
             'link' => '/products/air',
-            'price' => 193.35,
-            'category' => 'Men\'s running shoes',
+            'price' => 15099,
+            'category' => 'Men\'s casual shoes',
             'htmlDescription' => Str::markdown($description)
         ];
 

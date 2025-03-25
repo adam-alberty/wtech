@@ -1,22 +1,11 @@
 <x-layouts.default>
-    <x-layouts.checkout :step="1">
+    <x-layouts.checkout :step="2">
         <div class="col-span-2">
-            <h2 class="text-2xl font-semibold mb-10">Cart</h2>
+            <h2 class="text-2xl font-semibold mb-10">Delivery</h2>
+
+            <input type="text" class="rounded-xl bg-background border-2 border-primary p-3 w-full">
 
 
-            <table class="w-full">
-                <thead class="text-left">
-                    <th class="pb-10">Product</th>
-                    <th class="pb-10">Quantity</th>
-                    <th class="pb-10">Price</th>
-                </thead>
-                <tbody class="mb-">
-                    <x-cart.item />
-                    <x-cart.item />
-                    <x-cart.item />
-                    <x-cart.item />
-                </tbody>
-            </table>
         </div>
 
         <div class="bg-gray-100 p-4 rounded sticky top-20">
