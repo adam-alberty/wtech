@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="{{ url('favicon.jpg') }}">
     <title>{{ config('app.name') }} | @yield('title', 'Step into Style – The Best Shoes for Every Occasion')</title>
 
     <!-- Fonts -->
