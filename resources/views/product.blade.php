@@ -19,7 +19,7 @@
                         <div class="flex flex-wrap gap-2">
                             <button class="w-14 h-14 border-2 border-primary rounded-xl bg-green-400">
                             </button>
-                            <button class="w-14 h-14 border-2 border-transparent border-primary rounded-xl bg-blue-400">
+                            <button class="w-14 h-14 border-2 border-transparent rounded-xl bg-blue-400">
                             </button>
                         </div>
 
@@ -64,15 +64,14 @@
 
                     <button class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-10">Add to
                         cart</button>
-                    <p class="mt-10 font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Ea
-                        ipsam
-                        necessitatibus
-                        consectetur odit eveniet
-                        soluta et consequuntur pariatur fugit! Quasi illum ipsam ullam doloribus quae ratione nihil sunt
-                        optio
-                        at.
-                    </p>
+
+                    <div class="bg-gray-100 mt-10 p-5 text-center">
+                        Get free shipping on all orders over 50 €
+                    </div>
+
+                    <section class="mt-10 prose">
+                        {!! $product['htmlDescription'] !!}
+                    </section>
 
                 </div>
             </section>
