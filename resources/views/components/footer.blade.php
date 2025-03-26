@@ -2,7 +2,7 @@
 
 <footer class="px-8">
     <div class="max-w-screen-2xl mx-auto py-20">
-        <div class="grid grid-cols-5 items-start gap-30 font-semibold">
+        <div class="grid lg:grid-cols-5 items-start gap-y-10 lg:gap-y-30 lg:gap-30 font-semibold">
             <section class="grid gap-2 text-muted-foreground">
                 <h2 class="mb-5 text-foreground">Company</h2>
                 <a href="{{ route('about') }}">About</a>
@@ -24,7 +24,7 @@
                 <a href="{{ route('terms_of_use') }}">Terms of Use</a>
             </section>
 
-            <div class="col-span-2 justify-self-end w-[200px]">
+            <div class="lg:col-span-2 lg:justify-self-end w-[200px]">
                 <img src="/assets/logo.png" alt="">
             </div>
         </div>
