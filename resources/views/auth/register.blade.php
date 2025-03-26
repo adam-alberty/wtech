@@ -3,13 +3,13 @@
 
     <h1 class="text-2xl font-semibold mt-10 mb-10">Register an account</h1>
 
-    <form action="" class="grid gap-2">
-        <input type="text" placeholder="Email" class="p-3 rounded-xl border w-full">
-        <div class="grid grid-cols-2 gap-2">
-            <input type="text" placeholder="First name" class="p-3 rounded-xl border w-full">
-            <input type="text" placeholder="Last name" class="p-3 rounded-xl border w-full">
+    <form action="" class="grid gap-3">
+        <x-input :label="'Email'" :id="'register-email'" :type="'email'" :name="'email'" :placeholder="'mail@example.com'" />
+        <div class="grid grid-cols-2 gap-3">
+            <x-input :label="'First name'" :id="'register-first_name'" :name="'first_name'" :placeholder="'John'" />
+            <x-input :label="'Last name'" :id="'register-last_name'" :name="'last_name'" :placeholder="'Smith'" />
         </div>
-        <input type="password" placeholder="Password" class="p-3 rounded-xl border w-full">
+        <x-input :label="'Password'" :id="'register-password'" :type="'password'" :name="'password'" />
 
         <p class="mt-3">Already have an account? <a href="/login" class="underline">Sign in here</a> and
             enjoy amazing deals!</p>

@@ -25,7 +25,7 @@
             </section>
 
             <div class="lg:col-span-2 lg:justify-self-end w-[200px]">
-                <img src="/assets/logo.png" alt="">
+                <x-logo />
             </div>
         </div>
 

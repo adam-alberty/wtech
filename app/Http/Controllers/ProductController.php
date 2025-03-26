@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index($id)
+    public function single($id)
     {
         $description = <<<EOD
 These **Stylish Leather Sneakers** are the perfect blend of comfort and style. Designed for everyday wear, they feature a sleek, minimalist design that pairs well with any outfit, from casual to smart-casual. Crafted with premium leather and a durable rubber sole, these sneakers are built to last.
@@ -43,5 +43,21 @@ EOD;
         ];
 
         return view('product')->with('product', $product);
+    }
+
+
+    public function category($id)
+    {
+
+        $products = [
+            [
+                'name' => 'Nike Air Force 1',
+                'image' => '/assets/product-1.png',
+                'link' => '/product/nike-air-force-1',
+                'price' => 9099,
+                'category' => 'Men\'s running shoes',
+            ],
+        ];
+        return view('category')->with('products', $products);
     }
 }

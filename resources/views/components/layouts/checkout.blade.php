@@ -3,21 +3,23 @@
 
         <div class="grid grid-cols-3 gap-5 mb-10">
             <div @class([
-                'px-10 py-3 border-t-4',
-                'border-primary font-bold' => $step == 1,
-            ])>Shopping cart</div>
+                'px-3 py-3 flex justify-center border-t-4',
+                'border-primary font-bold text-foreground' => $step == 1,
+                'text-muted-foreground' => $step != 1,
+            ])><span class="hidden md:inline">Shopping </span>Cart</div>
             <div @class([
-                'px-10 py-3 border-t-4',
-                'border-primary font-bold' => $step == 2,
+                'px-3 py-3 flex justify-center border-t-4',
+                'border-primary font-bold text-foreground' => $step == 2,
+                'text-muted-foreground' => $step != 2,
             ])>Delivery</div>
             <div @class([
-                'px-10 py-3 border-t-4',
-                'border-primary font-bold' => $step == 3,
+                'px-3 py-3 flex justify-center border-t-4',
+                'border-primary font-bold text-foreground' => $step == 3,
+                'text-muted-foreground' => $step != 3,
             ])>Payment</div>
         </div>
 
-        <section class="grid grid-cols-3 items-start gap-10">
-            {{ $slot }}
-        </section>
+
+        {{ $slot }}
     </div>
 </div>
