@@ -1,20 +1,16 @@
 <x-layouts.default>
     <div class="px-8">
         <div class="mx-auto max-w-screen-lg mt-10 mb-20">
-            <section class="grid md:grid-cols-5 gap-10">
+            <section class="grid items-start md:grid-cols-5 gap-10">
                 <div class="md:sticky top-20 md:col-span-3 flex items-start gap-2">
                     <div class="shrink-0 grid gap-2">
-                        <img src="/assets/product-2.png" class="object-cover w-8 h-8 md:w-16 md:h-16 rounded-md"
-                            alt="">
-                        <img src="/assets/product-3.png" class="object-cover w-8 h-8 md:w-16 md:h-16 rounded-md"
-                            alt="">
-                        <img src="/assets/product-4.png" class="object-cover w-8 h-8 md:w-16 md:h-16 rounded-md"
-                            alt="">
-                        <img src="/assets/product-5.png" class="object-cover w-8 h-8 md:w-16 md:h-16 rounded-md"
-                            alt="">
+                        <img src="/assets/product-2.png" class="object-cover w-8 h-8 md:w-16 md:h-16" alt="">
+                        <img src="/assets/product-3.png" class="object-cover w-8 h-8 md:w-16 md:h-16" alt="">
+                        <img src="/assets/product-4.png" class="object-cover w-8 h-8 md:w-16 md:h-16" alt="">
+                        <img src="/assets/product-5.png" class="object-cover w-8 h-8 md:w-16 md:h-16" alt="">
                     </div>
                     <div>
-                        <img class="h-full w-full object-cover rounded-lg" src="/assets/product-1.png" alt="">
+                        <img class="h-full w-full object-cover" src="/assets/product-1.png" alt="">
                     </div>
                 </div>
 
@@ -29,9 +25,9 @@
                         <div class="font-semibold mb-2">Select variant</div>
 
                         <div class="flex flex-wrap gap-2">
-                            <button class="w-10 h-10 outline-3 outline-offset-2 outline-primary rounded bg-blue-600">
+                            <button class="w-10 h-10 outline-3 outline-offset-2 outline-primary rounded-sm bg-blue-600">
                             </button>
-                            <button class="w-10 h-10 outline-offset-2 oultine-transparent rounded bg-red-400">
+                            <button class="w-10 h-10 outline-offset-2 oultine-transparent rounded-sm bg-red-400">
                             </button>
                         </div>
                     </div>
@@ -39,35 +35,35 @@
                     <div class="mt-5">
                         <div class="font-semibold mb-2">Select size</div>
 
-                        <div class="flex flex-wrap gap-2">
-                            <button class="rounded-xl p-2 px-4 border">
+                        <div class="grid grid-cols-4 gap-2">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 38
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 38.5
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 38.5
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 39
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 39.5
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 40
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 40.5
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 41
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border">
                                 EU 41.5
                             </button>
-                            <button class="rounded-xl p-2 px-4 border">
+                            <button class="rounded-sm p-3 px-2 border line-through text-muted-foreground">
                                 EU 40
                             </button>
                         </div>

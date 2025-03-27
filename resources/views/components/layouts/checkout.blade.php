@@ -1,5 +1,5 @@
 <div class="px-8">
-    <div class="mx-auto max-w-screen-lg mt-10 mb-40">
+    <div class="mx-auto max-w-screen-2xl mt-10 mb-40">
 
         <div class="grid grid-cols-3 gap-5 mb-10">
             <div @class([

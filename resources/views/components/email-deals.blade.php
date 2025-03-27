@@ -1,4 +1,4 @@
-<section class="bg-black text-white rounded-t-4xl p-8">
+<section class="bg-black text-white p-8">
     <div class="mx-auto max-w-screen-2xl py-30 flex flex-col items-center text-center">
         <h2 class="text-2xl font-semibold">Don't miss out on anything!</h2>
         <p class="max-w-prose mt-5">
