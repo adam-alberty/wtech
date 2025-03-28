@@ -1,7 +1,7 @@
 <tr>
     <td class="pb-7">
         <div class="flex items-start gap-4">
-            <img src="/assets/product-1.png" class="w-10 h-10 object-cover rounded" alt="">
+            <img src="/assets/product-1.png" class="w-10 h-10 object-cover" alt="">
             <div>
                 <div class="font-semibold">Nike Air Force 1</div>
                 <div class="text-sm">Size: 42</div>

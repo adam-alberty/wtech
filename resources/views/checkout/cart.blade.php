@@ -21,7 +21,7 @@
                 </table>
             </div>
 
-            <div class="bg-gray-100 p-4 rounded sticky top-20">
+            <div class="bg-gray-100 p-5 sticky top-20">
                 <div class="text-2xl font-semibold mb-3">Summary</div>
                 <div>
                     <div>Total</div>

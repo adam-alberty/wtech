@@ -1,6 +1,6 @@
 <x-layouts.default>
     <div class="px-8">
-        <div class="mx-auto max-w-screen-lg mt-10 mb-20">
+        <div class="mx-auto max-w-screen-xl mt-10 mb-20">
             <section class="grid items-start md:grid-cols-5 gap-10">
                 <div class="md:sticky top-20 md:col-span-3 flex items-start gap-2">
                     <div class="shrink-0 grid gap-2">
