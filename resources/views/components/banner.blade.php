@@ -1,7 +1,6 @@
 <section>
     <div class="h-[60vh] relative">
-        <img src="/assets/banner.jpg" class="object-cover h-full w-full brightness-40" alt="">
-
+        <img src="/assets/banner.jpg" class="object-cover h-full w-full brightness-40 select-none pointer-events-none" alt="">
 
         <div class="flex justify-center">
             <div class="absolute bottom-0 py-24 flex flex-col items-center gap-5">
