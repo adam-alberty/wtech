@@ -1,5 +1,5 @@
 <x-layouts.base>
-    <div class="max-w-md mx-auto py-10 px-8">
+    <main class="max-w-md mx-auto py-10 px-8">
         {{ $slot }}
-    </div>
+    </main>
 </x-layouts.base>

@@ -8,9 +8,11 @@
 
                 <table class="w-full">
                     <thead class="text-left">
-                        <th class="pb-10">Product</th>
-                        <th class="pb-10 px-3">Quantity</th>
-                        <th class="pb-10">Price</th>
+                        <tr>
+                            <th class="pb-10">Product</th>
+                            <th class="pb-10 px-3">Quantity</th>
+                            <th class="pb-10">Price</th>
+                        </tr>
                     </thead>
                     <tbody class="mb-">
                         <x-cart.item />

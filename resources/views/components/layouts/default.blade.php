@@ -1,5 +1,7 @@
 <x-layouts.base>
     @include('components.header')
-    {{ $slot }}
+    <main>
+        {{ $slot }}
+    </main>
     @include('components.footer')
 </x-layouts.base>

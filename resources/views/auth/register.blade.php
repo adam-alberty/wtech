@@ -10,6 +10,8 @@
             <x-input :label="'Last name'" :id="'register-last_name'" :name="'last_name'" :placeholder="'Smith'" />
         </div>
         <x-input :label="'Password'" :id="'register-password'" :type="'password'" :name="'password'" />
+        <x-input :label="'Repeat Password'" :id="'register-password-again'" :type="'password'" :name="'password-again'" />
+
 
         <p class="mt-3">Already have an account? <a href="/login" class="underline">Sign in here</a> and
             enjoy amazing deals!</p>
