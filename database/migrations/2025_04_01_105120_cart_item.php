@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skus', function (Blueprint $table) {
+        Schema::create('cart_item', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('sku', 20);
-            $table->decimal('price');
-            $table->decimal('price_before');
-            $table->integer('amount_in_stock');
+            $table->unsignedBigInteger('cart_id');
+            $table->unsignedBigInteger('sku_id');
+            $table->integer('quantity');
 
-            $table->foreign('product_id')->references('id')->on('products')
+            $table->foreign('cart_id')->references('id')->on('carts')
+                ->onDelete('cascade');
+            $table->foreign('sku_id')->references('id')->on('skus')
                 ->onDelete('cascade');
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skus');
+        Schema::dropIfExists('cart_item');
     }
 };

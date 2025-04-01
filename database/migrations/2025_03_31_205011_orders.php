@@ -17,13 +17,13 @@ return new class extends Migration
             $table->unsignedInteger('delivery_type_id');
             $table->unsignedInteger('payment_type_id');
             $table->decimal('price');
-            $table->string('full_name');
-            $table->string('email');
-            $table->string('phone_number');
-            $table->string('country');
-            $table->string('city');
-            $table->string('street_address');
-            $table->string('zip_code');
+            $table->string('full_name', 50);
+            $table->string('email', 50);
+            $table->string('phone_number', 20);
+            $table->string('country', 20);
+            $table->string('city', 20);
+            $table->string('street_address', 50);
+            $table->string('zip_code', 10);
             $table->enum('status', ['placed', 'sent', 'delivered', 'returned'])->default('placed');
             $table->timestamps();
 
