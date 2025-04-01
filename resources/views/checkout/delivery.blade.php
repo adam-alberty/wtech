@@ -1,7 +1,7 @@
 <x-layouts.default>
     <x-layouts.checkout :step="2">
         <section class="grid md:grid-cols-3 items-start gap-10">
-            <div class="col-span-2">
+            <div class="md:col-span-2">
                 <h2 class="text-2xl font-semibold mb-10">Delivery</h2>
 
                 <div class="grid gap-4">
