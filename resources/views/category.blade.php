@@ -34,12 +34,12 @@
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label for="filter-price-from" class="inline-block mb-1">From</label>
-                                <input id="filter-price-from" type="text" class="bg-input w-full p-2 rounded-sm"
+                                <input id="filter-price-from" type="text" class="bg-gray-100 w-full p-2 rounded-sm"
                                     placeholder="From">
                             </div>
                             <div>
                                 <label for="filter-price-to" class="inline-block mb-1">To</label>
-                                <input id="filter-price-to" type="text" class="bg-input w-full p-2 rounded-sm"
+                                <input id="filter-price-to" type="text" class="bg-gray-100 w-full p-2 rounded-sm"
                                     placeholder="To">
                             </div>
                         </div>

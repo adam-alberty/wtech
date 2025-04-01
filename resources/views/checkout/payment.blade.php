@@ -1,39 +1,18 @@
 <x-layouts.default>
     <x-layouts.checkout :step="3">
-        <div class="col-span-2">
-            <h2 class="text-2xl font-semibold mb-10">Cart</h2>
+        <section class="grid md:grid-cols-3 items-start gap-10">
+            <div class="col-span-2">
+                <h2 class="text-2xl font-semibold mb-10">Payment</h2>
 
 
-            <table class="w-full">
-                <thead class="text-left">
-                    <th class="pb-10">Product</th>
-                    <th class="pb-10">Quantity</th>
-                    <th class="pb-10">Price</th>
-                </thead>
-                <tbody class="mb-">
-                    <x-cart.item />
-                    <x-cart.item />
-                    <x-cart.item />
-                    <x-cart.item />
-                </tbody>
-            </table>
-        </div>
-
-        <div class="bg-gray-100 p-4 rounded sticky top-20">
-            <div class="text-2xl font-semibold mb-3">Summary</div>
-            <div>
-                <div>Total</div>
-                <div class="font-semibold">1993.99 €</div>
+                <div class="mt-14 grid gap-3">
+                    <div class="p-3 bg-gray-300 rounded">Paypal</div>
+                    <div class="p-3 bg-muted rounded">Stripe</div>
+                    <div class="p-3 bg-muted rounded">In person</div>
+                </div>
             </div>
 
-            <div class="mt-10">
-                <input type="text" class="bg-input p-3 w-full rounded-full mb-1" placeholder="Coupon code">
-                <button class="w-full bg-gray-300 p-3 rounded-full">Apply coupon</button>
-            </div>
-            <div class="my-5 h-px bg-border"></div>
-            <button class="bg-primary text-primary-foreground rounded-full w-full p-3">
-                Continue
-            </button>
-        </div>
+            <x-cart.summary />
+        </section>
     </x-layouts.checkout>
 </x-layouts.default>
