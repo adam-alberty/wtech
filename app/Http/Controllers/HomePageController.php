@@ -2,42 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
     public function index()
     {
-        $new_arrivals = [
-            [
-                'name' => 'Nike Air Force 1',
-                'image' => '/assets/product-1.png',
-                'link' => '/product/nike-air-force-1',
-                'price' => 9099,
-                'category' => 'Men\'s running shoes',
-            ],
-            [
-                'name' => 'Adidas Ultraboost',
-                'image' => '/assets/product-2.png',
-                'link' => '/product/air',
-                'price' => 15099,
-                'category' => 'Men\'s running shoes',
-            ],
-            [
-                'name' => 'Converse Chuck Taylor All-Star',
-                'image' => '/assets/product-3.png',
-                'link' => '/product/air',
-                'price' => 7599,
-                'category' => 'Men\'s running shoes',
-            ],
-            [
-                'name' => 'Jordan 1 Retro',
-                'image' => '/assets/product-4.png',
-                'link' => '/product/air',
-                'price' => 13999,
-                'category' => 'Men\'s running shoes',
-            ],
-        ];
+        $products = Product::with('categories')
+            ->latest()
+            ->take(4)
+            ->get();
+
+        $new_arrivals = $products->map(function ($product) {
+            return [
+                'name' => $product->name,
+                'image' => $product->image->path,
+                'link' => "/product/{$product->slug}",
+                'price' => $product->sku->price,
+                'category' => $product->categories->first()->name,
+            ];
+        })->toArray();
 
         $most_popular = [
             [
