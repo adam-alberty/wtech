@@ -6,16 +6,12 @@
 
         <div class="hidden lg:block shrink-0 grow w-full">
             <nav class="font-medium flex group">
-                <a href="{{ route('category', 'featured') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">New
-                    &
-                    Featured</a>
-                <a href="{{ route('category', 'men') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Men</a>
-                <a href="{{ route('category', 'women') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Women</a>
-                <a href="{{ route('category', 'kids') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Kids</a>
+                @foreach($collections as $collection)
+                    <a href="{{ route('category', $collection->slug) }}"
+                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">
+                        {{ $collection->name }}
+                    </a>
+                @endforeach
             </nav>
         </div>
 
