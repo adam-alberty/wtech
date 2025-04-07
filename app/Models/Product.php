@@ -18,14 +18,15 @@ class Product extends Model
         return $this->belongsToMany(Discount::class);
     }
 
-    public function image()
+    public function images()
     {
-        return $this->hasOne(ProductImage::class, 'product_id', 'id');
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 
-    public function sku()
+    public function skus()
     {
-        return $this->hasOne(SKU::class, 'product_id', 'id');
+        return $this->hasMany(SKU::class);
     }
+
 
 }

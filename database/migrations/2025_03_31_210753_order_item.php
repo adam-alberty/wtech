@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('sku_id')->nullable();
             $table->string('name', 50);
-            $table->decimal('unit_price');
+            $table->integer('unit_price');
             $table->integer('quantity');
             $table->timestamps();
 
