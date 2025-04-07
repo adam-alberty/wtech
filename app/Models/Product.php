@@ -28,5 +28,9 @@ class Product extends Model
         return $this->hasMany(SKU::class);
     }
 
+    public function collections()
+    {
+        return $this->belongsToMany(Collection::class, 'collection_products');
+    }
 
 }
