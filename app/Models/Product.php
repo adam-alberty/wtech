@@ -33,4 +33,9 @@ class Product extends Model
         return $this->belongsToMany(Collection::class, 'collection_products');
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
 }

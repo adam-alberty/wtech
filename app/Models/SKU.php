@@ -19,5 +19,9 @@ class SKU extends Model
         return $this->hasMany(OrderItem::class, 'sku_id');
     }
 
+    public function color()
+    {
+        return $this->belongsTo(Color::class);
+    }
 
 }

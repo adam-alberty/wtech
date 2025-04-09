@@ -16,8 +16,11 @@ return new class extends Migration
            $table->string('slug', 50);
            $table->string('name', 50);
            $table->text('description');
-           $table->string('brand', 50);
+            $table->unsignedBigInteger('brand_id');
            $table->timestamps();
+
+            $table->foreign('brand_id')->references('id')->on('brands')
+                ->onDelete('cascade');
         });
     }
 
