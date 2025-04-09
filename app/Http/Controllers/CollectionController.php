@@ -41,11 +41,8 @@ class CollectionController extends Controller
             $products_query->whereHas('collections', function ($query) use ($collection) {
                 $query->where('collection_id', $collection->id);
             });
-        } else {
-            $products_query->whereHas('collections', function ($query) {
-                $query->whereIn('collection_id', Collection::pluck('id'));
-            });
         }
+
 
         // Filter by category
         if ($selected_category) {
@@ -79,17 +76,26 @@ class CollectionController extends Controller
 
         switch ($sort) {
             case 'newest':
-                $products_query->orderBy('created_at', 'desc');
+                $products_query->orderBy('created_at', 'desc')
+                    ->orderBy('id', 'desc');
                 break;
             case 'cheapest':
-                $products_query->orderBy('price', 'asc');
+                $products_query->orderBy('price', 'asc')
+                    ->orderBy('id', 'desc');
                 break;
             case 'most-expensive':
-                $products_query->orderBy('price', 'desc');
+                $products_query->orderBy('price', 'desc')
+                    ->orderBy('id', 'desc');
                 break;
             case 'top':
             default:
-                $products_query->orderBy('created_at', 'desc'); // TODO: add sort for top
+                $products_query->join('skus', 'products.id', '=', 'skus.product_id')
+                    ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
+                    ->select('products.*')
+                    ->selectRaw('COALESCE(SUM(order_item.quantity), 0) as total_quantity')
+                    ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at', 'products.updated_at', 'products.price', 'products.brand_id')
+                    ->orderBy('total_quantity', 'desc')
+                    ->orderBy('id', 'desc');
                 break;
         }
 
