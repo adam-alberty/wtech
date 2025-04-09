@@ -3,7 +3,7 @@
         <section class="mx-auto max-w-screen-3xl py-20 grid items-start md:grid-cols-[300px_auto] gap-10">
             <aside class="lg:ml-5">
                 <h2 class="text-2xl font-medium mb-10 py-2">
-                    {{ $collection->name }} ({{ $products->count() }})
+                    {{ $collection->name }} ({{ $products->total() }})
                 </h2>
                 <form method="GET" action="{{ route('collection', $collection->slug) }}">
                     <ul class="font-semibold mb-10">
@@ -16,6 +16,8 @@
                             </li>
                         @endforeach
                     </ul>
+
+                    <hr class="border-t-2 border-black mb-10">
 
                     <div class="grid gap-10 mt-10">
                         <section>
@@ -61,7 +63,7 @@
                         </section>
 
                         <div class="flex flex-col space-y-3">
-                            <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 space-y-5">
+                            <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
                                 Apply Filters
                             </button>
                             <a href="{{ route('collection', $collection->slug) }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 text-center">
@@ -103,6 +105,50 @@
                     @foreach ($products as $product)
                         @include('components.product', $product)
                     @endforeach
+                </div>
+
+                <div class="mt-10 flex justify-center items-center gap-2 flex-wrap">
+                    <!-- First Button -->
+                    @if ($products->onFirstPage())
+                        <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">First</span>
+                    @else
+                        <a href="{{ $products->url(1) }}"
+                           class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">First</a>
+                    @endif
+
+                    @php
+                        $currentPage = $products->currentPage();
+                        $lastPage = $products->lastPage();
+                        $range = 2;
+                        $start = max(1, $currentPage - $range);
+                        $end = min($lastPage, $currentPage + $range);
+
+                        // Adjust start and end to always show 5 pages if possible
+                        if ($end - $start < 4) {
+                            if ($currentPage <= $range + 1) {
+                                $end = min(5, $lastPage);
+                            } else {
+                                $start = max(1, $lastPage - 4);
+                            }
+                        }
+                    @endphp
+
+                    @for ($i = $start; $i <= $end; $i++)
+                        @if ($i === $currentPage)
+                            <span class="px-4 py-2 bg-gray-700 text-white rounded font-bold">{{ $i }}</span>
+                        @else
+                            <a href="{{ $products->url($i) }}"
+                               class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">{{ $i }}</a>
+                        @endif
+                    @endfor
+
+                    <!-- Last Button -->
+                    @if ($products->onLastPage())
+                        <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">Last</span>
+                    @else
+                        <a href="{{ $products->url($products->lastPage()) }}"
+                           class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Last</a>
+                    @endif
                 </div>
             </div>
         </section>

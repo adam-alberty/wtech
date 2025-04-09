@@ -9,6 +9,7 @@ class HomePageController extends Controller
 {
     public function index()
     {
+        // New Arrivals
         $products = Product::with(['categories', 'images' => function ($query) {
             $query->where('order', 1);
         }])
@@ -17,18 +18,14 @@ class HomePageController extends Controller
             ->get();
 
         $new_arrivals = $products->map(function ($product) {
-            $sku = $product->skus->first(); // TODO: another method to choose sku
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/default-image.jpg',
+                'image' => $product->images->first()->path ?? '/assets/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
-                'price' => $sku->price ?? 0, // 'price' => $product->skus->min('price'),
+                'price' => $product->price ?? 0,
             ];
-
-
         })->toArray();
-
 
         $most_popular_products = Product::with(['categories', 'images' => function ($query) {
             $query->where('order', 1);
@@ -37,23 +34,20 @@ class HomePageController extends Controller
             ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
             ->select('products.*')
             ->selectRaw('COALESCE(SUM(order_item.quantity), 0) as total_quantity')
-            ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at', 'products.updated_at')
+            ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at', 'products.updated_at', 'products.price', 'products.brand_id')
             ->orderBy('total_quantity', 'desc')
             ->take(4)
             ->get();
 
         $most_popular = $most_popular_products->map(function ($product) {
-            $sku = $product->skus->first(); // TODO: another method to choose sku
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/default-image.jpg',
+                'image' => $product->images->first()->path ?? '/assets/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
-                'price' => $sku->price ?? 0, // 'price' => $product->skus->min('price'),
+                'price' => $product->price ?? 0,
             ];
-
         })->toArray();
-
 
         return view('index')->with('new_arrivals', $new_arrivals)->with('most_popular', $most_popular);
     }

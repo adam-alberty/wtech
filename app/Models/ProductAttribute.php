@@ -8,8 +8,6 @@ class ProductAttribute extends Model
 {
     protected $table = 'product_attribute';
 
-    public $timestamps = false;
-
     protected $fillable = ['product_id', 'name', 'order'];
 
 }

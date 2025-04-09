@@ -23,7 +23,6 @@ class CollectionController extends Controller
             $collection->slug = "/";
         }
 
-
         // Fetch all categories, brands, and colors for the sidebar
         $categories = Category::all();
         $brands = Brand::all();
@@ -39,14 +38,13 @@ class CollectionController extends Controller
         $products_query = Product::query();
 
         if ($slug) {
-            $products_query = Product::whereHas('collections', function ($query) use ($collection) {
+            $products_query->whereHas('collections', function ($query) use ($collection) {
                 $query->where('collection_id', $collection->id);
             });
         } else {
             $products_query->whereHas('collections', function ($query) {
                 $query->whereIn('collection_id', Collection::pluck('id'));
             });
-
         }
 
         // Filter by category
@@ -69,50 +67,51 @@ class CollectionController extends Controller
         }
 
         // Filter by price
-        if ($price_from || $price_to) {
-            $products_query->whereHas('skus', function ($query) use ($price_from, $price_to) {
-                if ($price_from && is_numeric($price_from) && $price_from >= 0) {
-                    $query->where('price', '>=', $price_from);
-                }
-                if ($price_to && is_numeric($price_to) && $price_to >= 0) {
-                    $query->where('price', '<=', $price_to);
-                }
-            });
+        if ($price_from && is_numeric($price_from) && $price_from >= 0) {
+            $products_query->where('price', '>=', $price_from);
+        }
+        if ($price_to && is_numeric($price_to) && $price_to >= 0) {
+            $products_query->where('price', '<=', $price_to);
         }
 
         // Eager load
-        $products_query->with(['images', 'skus', 'categories', 'brand']);
+        $products_query->with(['images', 'categories', 'brand', 'skus']);
 
         switch ($sort) {
             case 'newest':
                 $products_query->orderBy('created_at', 'desc');
                 break;
             case 'cheapest':
-                $products_query->select('products.*')
-                    ->selectRaw('(SELECT MIN(price) FROM skus WHERE skus.product_id = products.id) as min_price')
-                    ->orderBy('min_price', 'asc');
+                $products_query->orderBy('price', 'asc');
                 break;
             case 'most-expensive':
-                $products_query->select('products.*')
-                    ->selectRaw('(SELECT MAX(price) FROM skus WHERE skus.product_id = products.id) as max_price')
-                    ->orderBy('max_price', 'desc');
+                $products_query->orderBy('price', 'desc');
                 break;
             case 'top':
             default:
-                $products_query->orderBy('created_at', 'desc');
+                $products_query->orderBy('created_at', 'desc'); // TODO: add sort for top
                 break;
         }
 
-        $products = $products_query->get();
+        // Pagination: 12 products per page
+        $products = $products_query->paginate(12);
 
-        $products = $products->map(function ($product) {
-            $sku = $product->skus->first(); // TODO: another method to choose sku
+        $products->appends([
+            'category' => $selected_category,
+            'brand' => $selected_brands,
+            'color' => $selected_colors,
+            'price_from' => $price_from,
+            'price_to' => $price_to,
+            'sort' => $sort,
+        ]);
+
+        $products->through(function ($product) {
             return [
-                'link' => "123123",
-                'image' => $product->images->first()->path ?? '/default-image.jpg',
+                'link' => "/product/{$product->slug}",
+                'image' => $product->images->first()->path ?? '/assets/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
-                'price' => $sku->price ?? 0,
+                'price' => $product->price ?? 0,
             ];
         });
 
