@@ -15,7 +15,7 @@ class InfoController extends Controller
         $order = [
             'order_number' => $orderNumber,
             'full_name' => 'Name Surname',
-            'status' => 'Pending', // Pending, Processing, Shipped, Delivered, Canceled, Refunded
+            'status' => 'Pending',
         ];
         return view('info.order_status', compact('order'));
     }

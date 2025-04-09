@@ -21,32 +21,32 @@
                 <div class="font-semibold mb-2">Popular Categories</div>
                 <ul class="flex flex-wrap gap-3">
                     <li>
-                        <a href="{{ route('category', 'men') }}"
+                        <a href="{{ route('collection', 'men') }}"
                             class="px-4 py-2 rounded-full bg-muted inline-block hover:bg-gray-200 transition-colors">Nike
                             Air Jordan</a>
                     </li>
                     <li>
-                        <a href="{{ route('category', 'men') }}"
+                        <a href="{{ route('collection', 'men') }}"
                             class="px-4 py-2 rounded-full bg-muted inline-block hover:bg-gray-200 transition-colors">Vans
                             Old School</a>
                     </li>
                     <li>
-                        <a href="{{ route('category', 'men') }}"
+                        <a href="{{ route('collection', 'men') }}"
                             class="px-4 py-2 rounded-full bg-muted inline-block hover:bg-gray-200 transition-colors">Walking
                             shoes</a>
                     </li>
                     <li>
-                        <a href="{{ route('category', 'men') }}"
+                        <a href="{{ route('collection', 'men') }}"
                             class="px-4 py-2 rounded-full bg-muted inline-block hover:bg-gray-200 transition-colors">Football
                             shoes</a>
                     </li>
                     <li>
-                        <a href="{{ route('category', 'men') }}"
+                        <a href="{{ route('collection', 'men') }}"
                             class="px-4 py-2 rounded-full bg-muted inline-block hover:bg-gray-200 transition-colors">Tennis
                             shoes</a>
                     </li>
                     <li>
-                        <a href="{{ route('category', 'men') }}"
+                        <a href="{{ route('collection', 'men') }}"
                             class="px-4 py-2 rounded-full bg-muted inline-block hover:bg-gray-200 transition-colors">Football
                             shoes</a>
                     </li>

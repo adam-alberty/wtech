@@ -18,13 +18,15 @@ class HomePageController extends Controller
 
 
         $new_arrivals = $products->map(function ($product) {
+            $sku = $product->skus->first(); // TODO: another method to choose sku
             return [
-                'name' => $product->name,
-                'image' => $product->images->first()->path,
                 'link' => "/product/{$product->slug}",
-                'price' => $product->skus->min('price'),
-                'category' => $product->categories->first()->name,
+                'image' => $product->images->first()->path ?? '/default-image.jpg',
+                'name' => $product->name,
+                'category' => $product->categories->first()->name ?? 'Uncategorized',
+                'price' => $sku->price, // 'price' => $product->skus->min('price'),
             ];
+
         })->toArray();
 
 
@@ -41,13 +43,15 @@ class HomePageController extends Controller
             ->get();
 
         $most_popular = $most_popular_products->map(function ($product) {
+            $sku = $product->skus->first(); // TODO: another method to choose sku
             return [
-                'name' => $product->name,
-                'image' => $product->images->first()->path,
                 'link' => "/product/{$product->slug}",
-                'price' => $product->skus->min('price'),
-                'category' => $product->categories->first()->name,
+                'image' => $product->images->first()->path ?? '/default-image.jpg',
+                'name' => $product->name,
+                'category' => $product->categories->first()->name ?? 'Uncategorized',
+                'price' => $sku->price, // 'price' => $product->skus->min('price'),
             ];
+
         })->toArray();
 
 

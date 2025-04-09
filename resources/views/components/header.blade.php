@@ -7,7 +7,7 @@
         <div class="hidden lg:block shrink-0 grow w-full">
             <nav class="font-medium flex group">
                 @foreach($collections as $collection)
-                    <a href="{{ route('category', $collection->slug) }}"
+                    <a href="{{ route('collection', $collection->slug) }}"
                     class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">
                         {{ $collection->name }}
                     </a>
@@ -46,18 +46,18 @@
                 </button>
             </div>
 
-            <nav class="font-medium group flex flex-col">
-                <a href="{{ route('category', 'featured') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">New
-                    &
-                    Featured</a>
-                <a href="{{ route('category', 'men') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Men</a>
-                <a href="{{ route('category', 'women') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Women</a>
-                <a href="{{ route('category', 'kids') }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Kids</a>
-            </nav>
+{{--            <nav class="font-medium group flex flex-col">--}}
+{{--                <a href="{{ route('collection', 'featured') }}"--}}
+{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">New--}}
+{{--                    &--}}
+{{--                    Featured</a>--}}
+{{--                <a href="{{ route('collection', 'men') }}"--}}
+{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Men</a>--}}
+{{--                <a href="{{ route('collection', 'women') }}"--}}
+{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Women</a>--}}
+{{--                <a href="{{ route('collection', 'kids') }}"--}}
+{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Kids</a>--}}
+{{--            </nav>--}}
         </div>
     </div>
 </header>
