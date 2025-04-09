@@ -18,7 +18,7 @@
                     <h2 class="text-2xl font-semibold">{{ $product['name'] }}</h2>
                     <div class="text-muted-foreground text-lg">{{ $product['category'] }}</div>
                     <div class="text-lg font-semibold mt-4">
-                        {{ number_format($product['price'] / 100, 2, '.', ' ') }} €
+                        {{ number_format($product['price'], 2, '.', ' ') }} €
                     </div>
 
                     <div class="mt-5">

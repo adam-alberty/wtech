@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
             $table->unsignedInteger('delivery_type_id');
             $table->unsignedInteger('payment_type_id');
-            $table->integer('price');
+            $table->decimal('price');
             $table->string('full_name', 50);
             $table->string('email', 50);
             $table->string('phone_number', 20);

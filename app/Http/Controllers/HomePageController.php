@@ -16,7 +16,6 @@ class HomePageController extends Controller
             ->take(4)
             ->get();
 
-
         $new_arrivals = $products->map(function ($product) {
             $sku = $product->skus->first(); // TODO: another method to choose sku
             return [
@@ -24,8 +23,9 @@ class HomePageController extends Controller
                 'image' => $product->images->first()->path ?? '/default-image.jpg',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
-                'price' => $sku->price, // 'price' => $product->skus->min('price'),
+                'price' => $sku->price ?? 0, // 'price' => $product->skus->min('price'),
             ];
+
 
         })->toArray();
 
@@ -49,7 +49,7 @@ class HomePageController extends Controller
                 'image' => $product->images->first()->path ?? '/default-image.jpg',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
-                'price' => $sku->price, // 'price' => $product->skus->min('price'),
+                'price' => $sku->price ?? 0, // 'price' => $product->skus->min('price'),
             ];
 
         })->toArray();

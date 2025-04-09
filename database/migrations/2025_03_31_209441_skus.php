@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('sku', 20);
-            $table->integer('price');
-            $table->integer('price_before');
+            $table->decimal('price');
+            $table->decimal('price_before');
             $table->integer('amount_in_stock');
             $table->unsignedBigInteger('color_id');
 
