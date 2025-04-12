@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 
 Route::get('/', [HomePageController::class, "index"])->name('home');
-Route::get('/product/{id}', [ProductController::class, "single"])->name('product');
+Route::get('/product/{slug}', [ProductController::class, "single"])->name('product');
 Route::get('/collections/{slug?}', [CollectionController::class, 'collection'])->name('collection');
 Route::get('/checkout', [CheckoutController::class, "index"])->name('checkout');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
