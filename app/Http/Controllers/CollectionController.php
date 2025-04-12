@@ -43,7 +43,6 @@ class CollectionController extends Controller
             });
         }
 
-
         // Filter by category
         if ($selected_category) {
             $products_query->whereHas('categories', function ($query) use ($selected_category) {
@@ -93,7 +92,8 @@ class CollectionController extends Controller
                     ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
                     ->select('products.*')
                     ->selectRaw('COALESCE(SUM(order_item.quantity), 0) as total_quantity')
-                    ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at', 'products.updated_at', 'products.price', 'products.brand_id')
+                    ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at',
+                            'products.updated_at', 'products.price', 'products.brand_id')
                     ->orderBy('total_quantity', 'desc')
                     ->orderBy('id', 'desc');
                 break;

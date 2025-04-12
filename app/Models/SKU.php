@@ -14,6 +14,10 @@ class SKU extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
+    public function size()
+    {
+        return $this->belongsTo(Size::class, 'size_id');
+    }
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class, 'sku_id');

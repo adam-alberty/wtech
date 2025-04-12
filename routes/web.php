@@ -17,6 +17,8 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 // TODO: add "All products" to header
-// TODO: add sorting by top in CollectionController
-
+// TODO: search
+// TODO: auth
+// TODO: product card
+// TODO: cart
 
