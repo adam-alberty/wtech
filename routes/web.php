@@ -13,12 +13,20 @@ Route::get('/', [HomePageController::class, "index"])->name('home');
 Route::get('/product/{slug}', [ProductController::class, "single"])->name('product');
 Route::get('/collections/{slug?}', [CollectionController::class, 'collection'])->name('collection');
 Route::get('/checkout', [CheckoutController::class, "index"])->name('checkout');
+
+// Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'registerPost'])->name('register.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 // TODO: add "All products" to header
 // TODO: search
-// TODO: auth
-// TODO: product card
+// TODO: fix buttons product card
 // TODO: cart
-
+// TODO: redis for caching header
+// TODO: add About page
+// TODO: News page
+// TODO: Career page

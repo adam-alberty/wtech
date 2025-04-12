@@ -13,7 +13,7 @@ Route::view('/career', 'info.career')->name('career');
 
 Route::view('/order-status', 'info.order_status')->name('order_status');
 
-Route::post('/order-status', [InfoController::class, "get_order_status"])->name('get_order_status');
+Route::post('/order-status', [InfoController::class, "get_order_status"])->name('get_order_status'); // TODO: fix
 
 Route::view('/shipping-and-delivery', 'info.shipping_and_delivery')->name('shipping_and_delivery');
 

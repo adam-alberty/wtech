@@ -8,7 +8,7 @@
             <nav class="font-medium flex group">
                 @foreach($collections as $collection)
                     <a href="{{ route('collection', $collection->slug) }}"
-                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">
+                       class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">
                         {{ $collection->name }}
                     </a>
                 @endforeach
@@ -19,18 +19,30 @@
             @include('components.search')
 
             <nav class="flex items-center gap-3">
-                <a aria-label="Go to my account" href="{{ route('login') }}"
-                    class="p-2 rounded-full hover:bg-input focus:bg-input">
-                    <x-phosphor-user class="w-5 h-5" />
-                </a>
+                @auth
+                    <div class="flex items-center gap-2">
+                        <span>{{ auth()->user()->email }}</span>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" aria-label="Log out" class="p-2 rounded-full hover:bg-input focus:bg-input">
+                                <x-phosphor-sign-out class="w-5 h-5" />
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a aria-label="Go to my account" href="{{ route('login') }}"
+                       class="p-2 rounded-full hover:bg-input focus:bg-input">
+                        <x-phosphor-user class="w-5 h-5" />
+                    </a>
+                @endauth
 
                 <a aria-label="Go to shopping cart" href="{{ route('checkout') }}"
-                    class="p-2 rounded-full hover:bg-input focus:bg-input">
+                   class="p-2 rounded-full hover:bg-input focus:bg-input">
                     <x-phosphor-shopping-bag-light class="w-6 h-6" />
                 </a>
 
                 <button id="menu-button" aria-label="Open menu"
-                    class="lg:hidden p-2 rounded-full hover:bg-input focus:bg-input">
+                        class="lg:hidden p-2 rounded-full hover:bg-input focus:bg-input">
                     <x-phosphor-list class="w-6 h-6" />
                 </button>
             </nav>
@@ -45,42 +57,25 @@
                     <x-phosphor-x class="w-6 h-6" />
                 </button>
             </div>
-
-{{--            <nav class="font-medium group flex flex-col">--}}
-{{--                <a href="{{ route('collection', 'featured') }}"--}}
-{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">New--}}
-{{--                    &--}}
-{{--                    Featured</a>--}}
-{{--                <a href="{{ route('collection', 'men') }}"--}}
-{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Men</a>--}}
-{{--                <a href="{{ route('collection', 'women') }}"--}}
-{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Women</a>--}}
-{{--                <a href="{{ route('collection', 'kids') }}"--}}
-{{--                    class="group-hover:text-gray-500 hover:text-black underline-offset-8 decoration-1 px-5 py-2 transition-colors">Kids</a>--}}
-{{--            </nav>--}}
         </div>
     </div>
 </header>
 
 <script>
-    const menuButton = document.getElementById("menu-button")
-    const menuCloseButton = document.getElementById("menu-close-button")
-    const mobileNav = document.getElementById("mobile-nav")
-    const menuCloseOverlay = document.getElementById("menu-close-overlay")
+    const menuButton = document.getElementById("menu-button");
+    const menuCloseButton = document.getElementById("menu-close-button");
+    const mobileNav = document.getElementById("mobile-nav");
+    const menuCloseOverlay = document.getElementById("menu-close-overlay");
 
     menuButton.addEventListener('click', (e) => {
-        mobileNav.classList.remove('hidden')
-    })
+        mobileNav.classList.remove('hidden');
+    });
 
     menuCloseButton.addEventListener('click', (e) => {
-        mobileNav.classList.add('hidden')
-    })
-
-    menuCloseButton.addEventListener('click', (e) => {
-        mobileNav.classList.add('hidden')
-    })
+        mobileNav.classList.add('hidden');
+    });
 
     menuCloseOverlay.addEventListener('click', (e) => {
-        mobileNav.classList.add('hidden')
-    })
+        mobileNav.classList.add('hidden');
+    });
 </script>
