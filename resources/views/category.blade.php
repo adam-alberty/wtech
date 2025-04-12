@@ -62,6 +62,19 @@
                             </ul>
                         </section>
 
+                        <section>
+                            <h3 class="font-semibold mb-3">Size</h3>
+                            <ul>
+                                @foreach ($sizes as $size)
+                                    <li class="flex gap-2">
+                                        <input type="checkbox" name="size[]" value="{{ $size->id }}"
+                                               {{ in_array($size->id, $selected_sizes) ? 'checked' : '' }} />
+                                        <div>{{ 'EU ' . $size->name }}</div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </section>
+
                         <div class="flex flex-col space-y-3">
                             <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
                                 Apply Filters

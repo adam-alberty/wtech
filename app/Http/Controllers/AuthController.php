@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login()
-    {
-        return view('auth.login');
-    }
-
     public function loginPost(Request $request)
     {
         $request->validate([
@@ -28,11 +23,6 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
-    }
-
-    public function register()
-    {
-        return view('auth.register');
     }
 
     public function registerPost(Request $request)

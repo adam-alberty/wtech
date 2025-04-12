@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -27,10 +28,12 @@ class CollectionController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $colors = Color::all();
+        $sizes = Size::all();
 
         $selected_category = request()->query('category');
         $selected_brands = array_filter((array) request()->query('brand', []));
         $selected_colors = array_filter((array) request()->query('color', []));
+        $selected_sizes = array_filter((array) request()->query('size', []));
         $price_from = request()->query('price_from');
         $price_to = request()->query('price_to');
         $sort = request()->query('sort', 'top');
@@ -59,6 +62,13 @@ class CollectionController extends Controller
         if (!empty($selected_colors)) {
             $products_query->whereHas('skus', function ($query) use ($selected_colors) {
                 $query->whereIn('color_id', $selected_colors);
+            });
+        }
+
+        // Filter by sizes
+        if (!empty($selected_sizes)) {
+            $products_query->whereHas('skus', function ($query) use ($selected_sizes) {
+                $query->whereIn('size_id', $selected_sizes);
             });
         }
 
@@ -106,6 +116,7 @@ class CollectionController extends Controller
             'category' => $selected_category,
             'brand' => $selected_brands,
             'color' => $selected_colors,
+            'size' => $selected_sizes,
             'price_from' => $price_from,
             'price_to' => $price_to,
             'sort' => $sort,
@@ -126,11 +137,13 @@ class CollectionController extends Controller
             'categories',
             'brands',
             'colors',
+            'sizes',
             'products',
             'sort',
             'selected_category',
             'selected_brands',
             'selected_colors',
+            'selected_sizes',
             'price_from',
             'price_to'
         ));
