@@ -15,12 +15,15 @@ class CollectionController extends Controller
     public function collection($slug = null)
     {
         $collection = null;
+
+        $query = request()->query('query');
+
         if ($slug) {
             $collection = Collection::where('slug', $slug)->firstOrFail();
         } else {
             // Show all collections
             $collection = Collection::all();
-            $collection->name = "All Products";
+            $collection->name = $query ? "Results for \"$query\"" : "All Products";
             $collection->slug = "/";
         }
 
@@ -48,6 +51,12 @@ class CollectionController extends Controller
                 ->where('amount_in_stock', '>', 0);
         });
 
+        // Filter by query
+        if ($query) {
+            $products_query->where('products.name', 'ILIKE', '%' . $query . '%');
+        }
+
+        // Filter by collection
         if ($slug) {
             $products_query->whereHas('collections', function ($query) use ($collection) {
                 $query->where('collection_id', $collection->id);
@@ -153,7 +162,8 @@ class CollectionController extends Controller
             'selected_colors',
             'selected_sizes',
             'price_from',
-            'price_to'
+            'price_to',
+            'query'
         ));
     }
 }

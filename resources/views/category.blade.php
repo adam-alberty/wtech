@@ -9,7 +9,7 @@
                     <ul class="font-semibold mb-10">
                         @foreach ($categories as $category)
                             <li class="py-1">
-                                <a href="{{ route('collection', ['slug' => $collection->slug, 'category' => $category->slug, 'sort' => $sort, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to]) }}"
+                                <a href="{{ route('collection', ['slug' => $collection->slug, 'query' => $query, 'category' => $category->slug, 'sort' => $sort, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to]) }}"
                                    class="{{ $selected_category === $category->slug ? 'text-black font-bold' : 'text-gray-600' }}">
                                     {{ $category->name }}
                                 </a>
@@ -79,12 +79,14 @@
                             <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
                                 Apply Filters
                             </button>
-                            <a href="{{ route('collection', $collection->slug) }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 text-center">
+                            <a href="{{ route('collection', ['slug' => $collection->slug, 'query' => $query]) }}"
+                               class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 text-center">
                                 Reset Filters
                             </a>
                         </div>
                     </div>
 
+                    <input type="hidden" name="query" value="{{ $query }}">
                     <input type="hidden" name="sort" value="{{ $sort }}">
                     @if ($selected_category)
                         <input type="hidden" name="category" value="{{ $selected_category }}">
@@ -95,19 +97,19 @@
             <div>
                 <section aria-label="Product ordering">
                     <div class="flex flex-col md:flex-row justify-end gap-1 mb-5 text-sm">
-                        <a href="{{ route('collection', ['slug' => $collection->slug, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'top']) }}"
+                        <a href="{{ route('collection', ['slug' => $collection->slug, 'query' => $query, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'top']) }}"
                            class="md:px-3 py-2 rounded-sm font-semibold {{ $sort === 'top' ? 'text-black' : 'text-muted-foreground' }}">
                             Top sellers
                         </a>
-                        <a href="{{ route('collection', ['slug' => $collection->slug, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'newest']) }}"
+                        <a href="{{ route('collection', ['slug' => $collection->slug, 'query' => $query, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'newest']) }}"
                            class="md:px-3 py-2 rounded-sm {{ $sort === 'newest' ? 'font-semibold text-black' : 'text-muted-foreground' }}">
                             Newest
                         </a>
-                        <a href="{{ route('collection', ['slug' => $collection->slug, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'cheapest']) }}"
+                        <a href="{{ route('collection', ['slug' => $collection->slug, 'query' => $query, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'cheapest']) }}"
                            class="md:px-3 py-2 rounded-sm {{ $sort === 'cheapest' ? 'font-semibold text-black' : 'text-muted-foreground' }}">
                             Cheapest
                         </a>
-                        <a href="{{ route('collection', ['slug' => $collection->slug, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'most-expensive']) }}"
+                        <a href="{{ route('collection', ['slug' => $collection->slug, 'query' => $query, 'category' => $selected_category, 'brand' => $selected_brands, 'color' => $selected_colors, 'price_from' => $price_from, 'price_to' => $price_to, 'sort' => 'most-expensive']) }}"
                            class="md:px-3 py-2 rounded-sm {{ $sort === 'most-expensive' ? 'font-semibold text-black' : 'text-muted-foreground' }}">
                             Most expensive
                         </a>
@@ -115,13 +117,16 @@
                 </section>
 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 gap-y-10">
-                    @foreach ($products as $product)
-                        @include('components.product', $product)
-                    @endforeach
+                    @if ($query && $products->isEmpty())
+                        <p class="text-muted-foreground col-span-full">No products found for "{{ $query }}".</p>
+                    @else
+                        @foreach ($products as $product)
+                            @include('components.product', $product)
+                        @endforeach
+                    @endif
                 </div>
 
                 <div class="mt-10 flex justify-center items-center gap-2 flex-wrap">
-                    <!-- First Button -->
                     @if ($products->onFirstPage())
                         <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">First</span>
                     @else
@@ -136,7 +141,6 @@
                         $start = max(1, $currentPage - $range);
                         $end = min($lastPage, $currentPage + $range);
 
-                        // Adjust start and end to always show 5 pages if possible
                         if ($end - $start < 4) {
                             if ($currentPage <= $range + 1) {
                                 $end = min(5, $lastPage);
@@ -155,7 +159,6 @@
                         @endif
                     @endfor
 
-                    <!-- Last Button -->
                     @if ($products->onLastPage())
                         <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">Last</span>
                     @else
