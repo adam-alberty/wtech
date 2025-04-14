@@ -13,6 +13,12 @@ class HomePageController extends Controller
         $products = Product::with(['categories', 'images' => function ($query) {
             $query->where('order', 1);
         }])
+            ->whereExists(function ($query) {
+                $query->select(\DB::raw(1))
+                    ->from('skus')
+                    ->whereColumn('skus.product_id', 'products.id')
+                    ->where('amount_in_stock', '>', 0);
+            })
             ->latest('created_at')
             ->orderBy('id', 'desc')
             ->take(4)
@@ -31,6 +37,12 @@ class HomePageController extends Controller
         $most_popular_products = Product::with(['categories', 'images' => function ($query) {
             $query->where('order', 1);
         }])
+            ->whereExists(function ($query) {
+                $query->select(\DB::raw(1))
+                      ->from('skus')
+                      ->whereColumn('skus.product_id', 'products.id')
+                      ->where('amount_in_stock', '>', 0);
+            })
             ->join('skus', 'products.id', '=', 'skus.product_id')
             ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
             ->select('products.*')
