@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\SKU;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,11 +19,14 @@ class ProductController extends Controller
                 $query->orderBy('order', 'asc');
             },
             'categories',
-            'skus.color'
+            'skus.color',
+            'skus.size'
         ])->where('slug', $slug)->firstOrFail();
 
         $productData = [
+            'id' => $product->id,
             'name' => $product->name,
+            'slug' => $product->slug,
             'image' => $product->images->first()->path ?? '/assets/default-image.png',
             'images' => $product->images->pluck('path')->toArray(),
             'link' => "/product/{$product->slug}",
@@ -33,9 +40,106 @@ class ProductController extends Controller
                     'code' => $color->color_code
                 ];
             })->toArray(),
-            'sizes' => $product->skus->pluck('size.name')->filter()->unique()->sort()->values()->toArray()
+            'sizes' => $product->skus->pluck('size')->unique('id')->map(function ($size) {
+                return [
+                    'id' => $size->id,
+                    'name' => $size->name
+                ];
+            })->toArray(),
+            'skus' => $product->skus->map(function ($sku) {
+                return [
+                    'color_id' => $sku->color_id,
+                    'size_id' => $sku->size_id,
+                    'amount_in_stock' => $sku->amount_in_stock
+                ];
+            })->toArray()
         ];
 
         return view('product')->with('product', $productData);
+    }
+
+    public function addToCart(Request $request, $slug)
+    {
+        $request->validate([
+            'color_id' => 'required|exists:colors,id',
+            'size_id' => 'required|exists:sizes,id',
+            'quantity' => 'required|integer|min:1'
+        ], [
+            'color_id.required' => 'Please select a color.',
+            'color_id.exists' => 'Selected color is invalid.',
+            'size_id.required' => 'Please select a size.',
+            'size_id.exists' => 'Selected size is invalid.',
+            'quantity.required' => 'Please enter a quantity.',
+            'quantity.integer' => 'Quantity must be a number.',
+            'quantity.min' => 'Quantity must be at least 1.'
+        ]);
+
+        $sku = Sku::where('product_id', Product::where('slug', $slug)->firstOrFail()->id)
+            ->where('color_id', $request->color_id)
+            ->where('size_id', $request->size_id)
+            ->with(['product', 'color', 'size'])
+            ->first();
+
+        if (!$sku) {
+            return redirect()->back()->with('error', 'Selected color and size combination is not available.');
+        }
+
+        // Check available quantity
+        $currentQuantity = 0;
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::id())->first();
+            if ($cart) {
+                $cartItem = $cart->items()->where('sku_id', $sku->id)->first();
+                $currentQuantity = $cartItem ? $cartItem->quantity : 0;
+            }
+        } else {
+            $cart = session()->get('cart', []);
+            $cartKey = 'sku_' . $sku->id;
+            $currentQuantity = isset($cart[$cartKey]) ? $cart[$cartKey]['quantity'] : 0;
+        }
+
+        $totalQuantity = $currentQuantity + $request->quantity;
+        if ($totalQuantity > $sku->amount_in_stock) {
+            return redirect()->back()->with('error', 'This quantity of the product is not available.');
+        }
+
+        if (Auth::check()) {
+            $cart = Cart::firstOrCreate(
+                ['user_id' => Auth::id()],
+                ['guest_token' => null]
+            );
+
+            $cartItem = $cart->items()->where('sku_id', $sku->id)->first();
+            if ($cartItem) {
+                $cartItem->update(['quantity' => $totalQuantity]);
+            } else {
+                $cart->items()->create([
+                    'sku_id' => $sku->id,
+                    'quantity' => $request->quantity
+                ]);
+            }
+        } else {
+            $cart = session()->get('cart', []);
+            $cartKey = 'sku_' . $sku->id;
+            if (isset($cart[$cartKey])) {
+                $cart[$cartKey]['quantity'] = $totalQuantity;
+            } else {
+                $cart[$cartKey] = [
+                    'sku_id' => $sku->id,
+                    'product_name' => $sku->product->name,
+                    'image' => $sku->product->images->first()->path ?? '/assets/default-image.png',
+                    'color_id' => $sku->color_id,
+                    'color_name' => $sku->color->name,
+                    'size_id' => $sku->size_id,
+                    'size_name' => $sku->size->name,
+                    'unit_price' => $sku->product->price,
+                    'quantity' => $request->quantity,
+                    'added_at' => now()->toDateTimeString()
+                ];
+            }
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->back()->with('success', 'Product added to cart!');
     }
 }

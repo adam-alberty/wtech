@@ -11,8 +11,10 @@ use App\Http\Controllers\CheckoutController;
 
 Route::get('/', [HomePageController::class, "index"])->name('home');
 Route::get('/product/{slug}', [ProductController::class, "single"])->name('product');
+Route::post('/product/{slug}/add-to-cart', [ProductController::class, 'addToCart'])->name('product.addToCart');
 Route::get('/collections/{slug?}', [CollectionController::class, 'collection'])->name('collection');
 Route::get('/checkout', [CheckoutController::class, "index"])->name('checkout');
+Route::post('/checkout/update', [CheckoutController::class, 'updateCart'])->name('checkout.update');
 
 // Auth
 Route::view('/login', 'auth.login')->name('login');
@@ -24,9 +26,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // TODO: add "All products" to header
 // TODO: search
-// TODO: fix buttons product card
-// TODO: cart
 // TODO: redis for caching header
 // TODO: add About page
 // TODO: News page
 // TODO: Career page
+// TODO: Clickable items in cart

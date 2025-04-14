@@ -24,7 +24,7 @@ class CollectionController extends Controller
             $collection->slug = "/";
         }
 
-        // Fetch all categories, brands, and colors for the sidebar
+        // Fetch all categories, brands, colors, and sizes for the sidebar
         $categories = Category::all();
         $brands = Brand::all();
         $colors = Color::all();
@@ -39,6 +39,14 @@ class CollectionController extends Controller
         $sort = request()->query('sort', 'top');
 
         $products_query = Product::query();
+
+        // Select only products where amount_in_stock > 0
+        $products_query->whereExists(function ($query) {
+            $query->select(\DB::raw(1))
+                ->from('skus')
+                ->whereColumn('skus.product_id', 'products.id')
+                ->where('amount_in_stock', '>', 0);
+        });
 
         if ($slug) {
             $products_query->whereHas('collections', function ($query) use ($collection) {
@@ -98,14 +106,14 @@ class CollectionController extends Controller
                 break;
             case 'top':
             default:
-                $products_query->join('skus', 'products.id', '=', 'skus.product_id')
-                    ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
-                    ->select('products.*')
-                    ->selectRaw('COALESCE(SUM(order_item.quantity), 0) as total_quantity')
-                    ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at',
-                            'products.updated_at', 'products.price', 'products.brand_id')
-                    ->orderBy('total_quantity', 'desc')
-                    ->orderBy('id', 'desc');
+            $products_query->join('skus', 'products.id', '=', 'skus.product_id')
+                ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
+                ->select('products.*')
+                ->selectRaw('COALESCE(SUM(order_item.quantity), 0) as total_quantity')
+                ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at',
+                    'products.updated_at', 'products.price', 'products.brand_id')
+                ->orderBy('total_quantity', 'desc')
+                ->orderBy('id', 'desc');
                 break;
         }
 
