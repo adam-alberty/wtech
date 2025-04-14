@@ -44,8 +44,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // TODO: add "All products" to header
 // TODO: redis for caching header
-// TODO: add About page
-// TODO: News page
-// TODO: Career page
+// TODO: add News page
 // TODO: Clickable items in cart
 // TODO: secure /checkout/order/
