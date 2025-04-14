@@ -66,8 +66,8 @@ class AuthController extends Controller
             return;
         }
 
-        $sessionCart = session()->get('cart', []);
-        if (empty($sessionCart)) {
+        $session_cart = session()->get('cart', []);
+        if (empty($session_cart)) {
             return;
         }
 
@@ -76,10 +76,10 @@ class AuthController extends Controller
             ['guest_token' => null]
         );
 
-        foreach ($sessionCart as $item) {
-            $cartItem = $cart->items()->where('sku_id', $item['sku_id'])->first();
-            if ($cartItem) {
-                $cartItem->update(['quantity' => $cartItem->quantity + $item['quantity']]);
+        foreach ($session_cart as $item) {
+            $cart_item = $cart->items()->where('sku_id', $item['sku_id'])->first();
+            if ($cart_item) {
+                $cart_item->update(['quantity' => $cart_item->quantity + $item['quantity']]);
             } else {
                 $cart->items()->create([
                     'sku_id' => $item['sku_id'],

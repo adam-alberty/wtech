@@ -85,21 +85,21 @@ class ProductController extends Controller
         }
 
         // Check available quantity
-        $currentQuantity = 0;
+        $current_quantity = 0;
         if (Auth::check()) {
             $cart = Cart::where('user_id', Auth::id())->first();
             if ($cart) {
-                $cartItem = $cart->items()->where('sku_id', $sku->id)->first();
-                $currentQuantity = $cartItem ? $cartItem->quantity : 0;
+                $cart_item = $cart->items()->where('sku_id', $sku->id)->first();
+                $current_quantity = $cart_item ? $cart_item->quantity : 0;
             }
         } else {
             $cart = session()->get('cart', []);
             $cartKey = 'sku_' . $sku->id;
-            $currentQuantity = isset($cart[$cartKey]) ? $cart[$cartKey]['quantity'] : 0;
+            $current_quantity = isset($cart[$cartKey]) ? $cart[$cartKey]['quantity'] : 0;
         }
 
-        $totalQuantity = $currentQuantity + $request->quantity;
-        if ($totalQuantity > $sku->amount_in_stock) {
+        $total_quantity = $current_quantity + $request->quantity;
+        if ($total_quantity > $sku->amount_in_stock) {
             return redirect()->back()->with('error', 'This quantity of the product is not available.');
         }
 
@@ -109,9 +109,9 @@ class ProductController extends Controller
                 ['guest_token' => null]
             );
 
-            $cartItem = $cart->items()->where('sku_id', $sku->id)->first();
-            if ($cartItem) {
-                $cartItem->update(['quantity' => $totalQuantity]);
+            $cart_item = $cart->items()->where('sku_id', $sku->id)->first();
+            if ($cart_item) {
+                $cart_item->update(['quantity' => $total_quantity]);
             } else {
                 $cart->items()->create([
                     'sku_id' => $sku->id,
@@ -122,7 +122,7 @@ class ProductController extends Controller
             $cart = session()->get('cart', []);
             $cartKey = 'sku_' . $sku->id;
             if (isset($cart[$cartKey])) {
-                $cart[$cartKey]['quantity'] = $totalQuantity;
+                $cart[$cartKey]['quantity'] = $total_quantity;
             } else {
                 $cart[$cartKey] = [
                     'sku_id' => $sku->id,

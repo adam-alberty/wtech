@@ -16,7 +16,7 @@
                     </div>
                 @endif
 
-                @if (empty($cartItems))
+                @if (empty($cart_items))
                     <p>Your cart is empty.</p>
                 @else
                     <table class="w-full">
@@ -28,7 +28,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($cartItems as $item)
+                        @foreach ($cart_items as $item)
                             <tr>
                                 <td class="pb-7">
                                     <div class="flex items-start gap-4">
@@ -41,7 +41,7 @@
                                     </div>
                                 </td>
                                 <td class="pb-7">
-                                    <form action="{{ route('checkout.update') }}" method="POST" class="flex items-center gap-3">
+                                    <form action="{{ route('cart.update') }}" method="POST" class="flex items-center gap-3">
                                         @csrf
                                         <input type="hidden" name="sku_id" value="{{ $item['sku_id'] }}">
                                         <button type="submit" name="quantity" value="{{ $item['quantity'] - 1 }}"
@@ -65,7 +65,15 @@
                 @endif
             </div>
 
-            <x-cart.summary :total="$total" />
+            <x-cart.summary
+                :subtotal="$subtotal"
+                :delivery_price="$delivery_price"
+                :total="$total"
+                :button_text="'Continue to Delivery'"
+                :button_link="route('delivery')"
+                :step="1"
+                :button_disabled="empty($cart_items)"
+            />
         </section>
     </x-layouts.checkout>
 </x-layouts.default>

@@ -89,7 +89,7 @@
                         </div>
 
                         <button type="submit"
-                                class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-10 hover:bg-accent hover:text-accent-foreground transition-colors">
+                                class="bg-primary text-primary-foreground p-5 w-full font-bold rounded-full mt-10 hover:bg-gray-500 hover:text-accent-foreground transition-colors">
                             Add to Cart
                         </button>
                     </form>
