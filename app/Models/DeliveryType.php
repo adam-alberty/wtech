@@ -8,6 +8,9 @@ class DeliveryType extends Model
 {
     protected $table = "delivery_types";
 
-    protected $fillable = ["name", "price"];
+    protected $fillable = [
+        "name",
+        "price"
+    ];
 
 }

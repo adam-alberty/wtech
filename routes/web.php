@@ -41,7 +41,6 @@ Route::post('/register', [AuthController::class, 'registerPost'])->name('registe
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// TODO: add "All products" to header
 // TODO: redis for caching header
 // TODO: add News page
 // TODO: Clickable items in cart

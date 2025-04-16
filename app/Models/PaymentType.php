@@ -8,5 +8,8 @@ class PaymentType extends Model
 {
     protected $table = 'payment_types';
 
-    protected $fillable = ["name", "price"];
+    protected $fillable = [
+        "name",
+        "price"
+    ];
 }
