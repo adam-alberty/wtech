@@ -27,7 +27,7 @@ class ProductController extends Controller
             'id' => $product->id,
             'name' => $product->name,
             'slug' => $product->slug,
-            'image' => $product->images->first()->path ?? '/assets/default-image.png',
+            'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
             'images' => $product->images->pluck('path')->toArray(),
             'link' => "/product/{$product->slug}",
             'price' => $product->price,
@@ -127,7 +127,7 @@ class ProductController extends Controller
                 $cart[$cartKey] = [
                     'sku_id' => $sku->id,
                     'product_name' => $sku->product->name,
-                    'image' => $sku->product->images->first()->path ?? '/assets/default-image.png',
+                    'image' => $sku->product->images->first()->path ?? '/assets/images/default-image.png',
                     'color_id' => $sku->color_id,
                     'color_name' => $sku->color->name,
                     'size_id' => $sku->size_id,

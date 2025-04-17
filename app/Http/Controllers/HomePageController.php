@@ -27,7 +27,7 @@ class HomePageController extends Controller
         $new_arrivals = $products->map(function ($product) {
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/assets/default-image.png',
+                'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
                 'price' => $product->price ?? 0,
@@ -57,7 +57,7 @@ class HomePageController extends Controller
         $most_popular = $most_popular_products->map(function ($product) {
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/assets/default-image.png',
+                'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
                 'price' => $product->price ?? 0,

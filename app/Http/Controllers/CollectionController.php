@@ -142,7 +142,7 @@ class CollectionController extends Controller
         $products->through(function ($product) {
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/assets/default-image.png',
+                'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
                 'price' => $product->price ?? 0,
