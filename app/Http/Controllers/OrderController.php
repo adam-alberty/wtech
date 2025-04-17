@@ -85,14 +85,29 @@ class OrderController extends Controller
                     $cart->delete();
                 }
             }
+
+            session(['order_id' => $order->id]);
+
             session()->forget(['cart', 'delivery_data']);
 
             return redirect()->route('order.success', ['order' => $order->id]);
         });
     }
 
-    public function success(Order $order)
-    {
+    public function success(Order $order) {
+        if (Auth::check()) {
+            if ($order->user_id !== Auth::id()) {
+                return redirect()->route('home');
+        }
+    } else {
+        // Not authenticated user
+        if (session('order_id') !== $order->id) {
+            return redirect()->route('home');
+        }
+    }
+
+    session()->forget('order_id');
+
         return view('checkout.order', compact('order'));
     }
 }

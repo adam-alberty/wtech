@@ -44,4 +44,3 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // TODO: redis for caching header
 // TODO: add News page
 // TODO: Clickable items in cart
-// TODO: secure /checkout/order/
