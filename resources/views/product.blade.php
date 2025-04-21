@@ -4,12 +4,19 @@
             <section class="grid items-start md:grid-cols-5 gap-10">
                 <div class="md:sticky top-20 md:col-span-3 flex items-start gap-2">
                     <div class="shrink-0 grid gap-2">
-                        @foreach ($product['images'] as $image)
-                            <img src="{{ $image }}" class="object-cover w-8 h-8 md:w-16 md:h-16" alt="{{ $product['name'] }}">
+                        @foreach ($product['images'] as $index => $image)
+                            <img src="{{ $image }}"
+                                 class="object-cover w-8 h-8 md:w-16 md:h-16 cursor-pointer"
+                                 alt="{{ $product['name'] }}"
+                                 onclick="changeImage('{{ $image }}')"
+                                 id="thumbnail-{{ $index }}">
                         @endforeach
                     </div>
                     <div>
-                        <img class="h-full w-full object-cover" src="{{ $product['image'] }}" alt="{{ $product['name'] }}">
+                        <img class="h-full w-full object-cover"
+                             src="{{ $product['image'] }}"
+                             alt="{{ $product['name'] }}"
+                             id="main-image">
                     </div>
                 </div>
 
@@ -34,7 +41,6 @@
 
                     <form action="{{ route('product.addToCart', $product['slug']) }}" method="POST">
                         @csrf
-
                         <div class="mt-5">
                             <div class="font-semibold mb-2">Select Color</div>
                             <div class="flex flex-wrap gap-2">
@@ -94,10 +100,6 @@
                         </button>
                     </form>
 
-{{--                    <div class="bg-muted mt-10 p-5 text-center">--}}
-{{--                        Free shipping on orders over 50 €--}}
-{{--                    </div>--}}
-
                     <section class="mt-10 prose">
                         {!! $product['htmlDescription'] !!}
                     </section>
@@ -105,4 +107,11 @@
             </section>
         </div>
     </div>
+
+    <script>
+        function changeImage(imageSrc) {
+            const mainImage = document.getElementById('main-image');
+            mainImage.src = imageSrc;
+        }
+    </script>
 </x-layouts.default>
