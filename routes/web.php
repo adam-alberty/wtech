@@ -55,7 +55,7 @@ Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 
 
 // Admin
-Route::view('/admin', 'admin.index')->name('terms_of_use');
+Route::view('/admin', 'admin.index')->name('admin');
 
 
 // TODO: redis for caching header
