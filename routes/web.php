@@ -13,11 +13,13 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\ProductController;
 
+// Home page
 Route::get('/', [HomePageController::class, "index"])->name('home');
+
+// Product listings
 Route::get('/product/{slug}', [ProductController::class, "single"])->name('product');
 Route::post('/product/{slug}/add-to-cart', [ProductController::class, 'addToCart'])->name('product.addToCart');
 Route::get('/collections/{slug?}', [CollectionController::class, 'collection'])->name('collection');
-
 
 // Cart: step 1
 Route::get('/checkout', [CartController::class, 'index'])->name('checkout');
