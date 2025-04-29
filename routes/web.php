@@ -1,7 +1,5 @@
 <?php
 
-require base_path('routes/information.php');
-
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\DeliveryController;
