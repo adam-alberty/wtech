@@ -55,6 +55,11 @@ Route::view('/contact', 'info.contact')->name('contact');
 Route::view('/privacy-policy', 'info.privacy_policy')->name('privacy_policy');
 Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 
+
+// Admin
+Route::view('/admin', 'admin.index')->name('terms_of_use');
+
+
 // TODO: redis for caching header
 // TODO: add News page
 // TODO: Clickable items in cart
