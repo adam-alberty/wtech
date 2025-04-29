@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\ProductController;
 
 Route::get('/', [HomePageController::class, "index"])->name('home');
@@ -40,6 +41,17 @@ Route::view('/register', 'auth.register')->name('register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Other pages
+Route::view('/about', 'info.about')->name('about');
+Route::get('/news', [InfoController::class, "news"])->name('news');
+Route::view('/returns', 'info.returns')->name('returns');
+Route::view('/career', 'info.career')->name('career');
+Route::view('/order-status', 'info.order_status')->name('order_status');
+Route::post('/order-status', [InfoController::class, "get_order_status"])->name('get_order_status'); // TODO: fix
+Route::view('/shipping-and-delivery', 'info.shipping_and_delivery')->name('shipping_and_delivery');
+Route::view('/contact', 'info.contact')->name('contact');
+Route::view('/privacy-policy', 'info.privacy_policy')->name('privacy_policy');
+Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 
 // TODO: redis for caching header
 // TODO: add News page
