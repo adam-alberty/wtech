@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\DeliveryController;
@@ -55,7 +56,11 @@ Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 
 
 // Admin
-Route::view('/admin', 'admin.index')->name('admin');
+Route::get('/admin', [AdminController::class, "view_products"])->name('admin');
+Route::get('/admin/products', [AdminController::class, "view_products"])->name('admin.products');
+Route::get('/admin/products/create', [AdminController::class, "view_create_product"])->name('admin.products.create');
+
+
 
 
 // TODO: redis for caching header
