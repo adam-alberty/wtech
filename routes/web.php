@@ -68,6 +68,14 @@ Route::delete('/admin/brands/{id}', [AdminController::class, "delete_brand"])->n
 Route::get('/admin/brands/{id}', [AdminController::class, "view_edit_brand"])->name('admin.brands.edit');
 Route::put('/admin/brands/{id}', [AdminController::class, "edit_brand"])->name('admin.brands.edit');
 
+
+Route::get('/admin/categories', [AdminController::class, "view_categories"])->name('admin.categories');
+Route::get('/admin/categories/create', [AdminController::class, "view_create_category"])->name('admin.categories.create');
+Route::post('/admin/categories/create', [AdminController::class, "create_category"])->name('admin.categories.store');
+Route::delete('/admin/categories/{id}', [AdminController::class, "delete_category"])->name('admin.categories.delete');
+Route::get('/admin/categories/{id}', [AdminController::class, "view_edit_category"])->name('admin.categories.edit');
+Route::put('/admin/categories/{id}', [AdminController::class, "edit_category"])->name('admin.categories.edit');
+
 // TODO: redis for caching header
 // TODO: add News page
 // TODO: Clickable items in cart

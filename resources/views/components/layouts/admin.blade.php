@@ -23,6 +23,12 @@
                                 'bg-muted' => Route::currentRouteName() == 'admin.brands',
                             ])>Brands</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.categories') }}" @class([
+                                'p-2 block',
+                                'bg-muted' => Route::currentRouteName() == 'admin.categories',
+                            ])>Categories</a>
+                        </li>
                     </ul>
                 </div>
                 <form action="{{ route('logout') }}" method="POST">
