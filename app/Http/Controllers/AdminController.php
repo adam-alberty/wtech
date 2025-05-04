@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Brand;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -14,6 +16,36 @@ class AdminController extends Controller
 
     public function view_create_product()
     {
-        return view('admin.products.create');
+        $brands = Brand::all();
+        return view('admin.products-create')->with('brands', $brands);
+    }
+
+    public function view_brands()
+    {
+        $brands = Brand::all();
+        return view('admin.brands')->with('brands', $brands);
+    }
+
+    public function view_create_brand()
+    {
+        return view('admin.brands-create');
+    }
+
+    public function create_brand(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $brand = Brand::create([
+            'name' => $validated['name'],
+        ]);
+        return redirect()->route('admin.brands');
+    }
+
+    public function delete_brand($id)
+    {
+        $brand = Brand::findOrFail($id);
+        $brand->delete();
+        return redirect()->route('admin.brands');
     }
 }

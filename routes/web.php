@@ -57,10 +57,14 @@ Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 
 // Admin
 Route::get('/admin', [AdminController::class, "view_products"])->name('admin');
+
 Route::get('/admin/products', [AdminController::class, "view_products"])->name('admin.products');
 Route::get('/admin/products/create', [AdminController::class, "view_create_product"])->name('admin.products.create');
 
-
+Route::get('/admin/brands', [AdminController::class, "view_brands"])->name('admin.brands');
+Route::get('/admin/brands/create', [AdminController::class, "view_create_brand"])->name('admin.brands.create');
+Route::post('/admin/brands/create', [AdminController::class, "create_brand"])->name('admin.brands.store');
+Route::delete('/admin/brands/{id}', [AdminController::class, "delete_brand"])->name('admin.brands.delete');
 
 
 // TODO: redis for caching header

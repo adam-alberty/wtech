@@ -2,10 +2,10 @@
 
     <div class="m-10">
         <div class="flex justify-between items-center gap-3">
-            <h1 class="text-2xl font-semibold">Products</h1>
-            <a href="{{ route('admin.products.create') }}"
+            <h1 class="text-2xl font-semibold">Brands</h1>
+            <a href="{{ route('admin.brands.create') }}"
                 class="inline-block p-2 px-4 bg-primary text-primary-foreground">New
-                Product</a>
+                Brand</a>
         </div>
 
         <table class="mt-10 w-full">
@@ -15,33 +15,19 @@
                         ID
                     </th>
                     <th class="py-2 px-4">
-                        Product name
-                    </th>
-                    <th class="py-2 px-4">
-                        Price
-                    </th>
-                    <th class="py-2 px-4">
-                        Description
+                        Brand name
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody class="text-left">
-                @foreach ($products as $product)
+                @foreach ($brands as $brands)
                     <tr class="border-b">
                         <td class="w-10 py-2 px-4">
-                            {{ $product->id }}
+                            {{ $brands->id }}
                         </td>
                         <td class="py-2 px-4">
-                            <a href="{{ route('product', $product->slug) }}"
-                                class="underline hover:underline-offset-4 transition-all">
-                                {{ $product->name }}</a>
-                        </td>
-                        <td class="py-2 px-4">
-                            {{ $product->price }} €
-                        </td>
-                        <td class="py-2 px-4">
-                            {{ $product->description }}
+                            {{ $brands->name }}
                         </td>
                         <td class="w-20">
                             <div class="flex gap-7">
@@ -49,10 +35,14 @@
                                     <x-phosphor-pen class="w-5 h-5" />
                                     <span>Edit</span>
                                 </a>
-                                <button class="flex gap-3 items-center text-red-500">
-                                    <x-phosphor-trash class="w-5 h-5" />
-                                    <span>Delete</span>
-                                </button>
+                                <form action="{{ route('admin.brands.delete', $brands->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="flex gap-3 items-center text-red-500">
+                                        <x-phosphor-trash class="w-5 h-5" />
+                                        <span>Delete</span>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

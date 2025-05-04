@@ -9,13 +9,19 @@
 
                     <ul>
                         <li>
-                            <a href="{{ route('admin.products') }}" class="p-2 bg-muted block">Products</a>
+                            <a href="{{ route('admin.products') }}" @class([
+                                'p-2 block',
+                                'bg-muted' => in_array(Route::currentRouteName(), [
+                                    'admin.products',
+                                    'admin',
+                                ]),
+                            ])>Products</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.products') }}" class="p-2 block">Categories</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.products') }}" class="p-2 block">Collections</a>
+                            <a href="{{ route('admin.brands') }}" @class([
+                                'p-2 block',
+                                'bg-muted' => Route::currentRouteName() == 'admin.brands',
+                            ])>Brands</a>
                         </li>
                     </ul>
                 </div>
