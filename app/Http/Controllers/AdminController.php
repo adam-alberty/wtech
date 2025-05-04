@@ -48,4 +48,23 @@ class AdminController extends Controller
         $brand->delete();
         return redirect()->route('admin.brands');
     }
+
+    public function view_edit_brand($id)
+    {
+        $brand = Brand::findOrFail($id);
+        return view('admin.brands-edit')->with('brand', $brand);
+    }
+
+    public function edit_brand(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $brand = Brand::findOrFail($id);
+        $brand->update([
+            'name' => $validated['name'],
+        ]);
+        return redirect()->route('admin.brands');
+    }
 }

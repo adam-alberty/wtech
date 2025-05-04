@@ -21,21 +21,21 @@
                 </tr>
             </thead>
             <tbody class="text-left">
-                @foreach ($brands as $brands)
+                @foreach ($brands as $brand)
                     <tr class="border-b">
                         <td class="w-10 py-2 px-4">
-                            {{ $brands->id }}
+                            {{ $brand->id }}
                         </td>
                         <td class="py-2 px-4">
-                            {{ $brands->name }}
+                            {{ $brand->name }}
                         </td>
                         <td class="w-20">
                             <div class="flex gap-7">
-                                <a href="/" class="flex gap-3 items-center">
+                                <a href="{{ route('admin.brands.edit', $brand->id) }}" class="flex gap-3 items-center">
                                     <x-phosphor-pen class="w-5 h-5" />
                                     <span>Edit</span>
                                 </a>
-                                <form action="{{ route('admin.brands.delete', $brands->id) }}" method="post">
+                                <form action="{{ route('admin.brands.delete', $brand->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="flex gap-3 items-center text-red-500">

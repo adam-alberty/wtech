@@ -65,7 +65,8 @@ Route::get('/admin/brands', [AdminController::class, "view_brands"])->name('admi
 Route::get('/admin/brands/create', [AdminController::class, "view_create_brand"])->name('admin.brands.create');
 Route::post('/admin/brands/create', [AdminController::class, "create_brand"])->name('admin.brands.store');
 Route::delete('/admin/brands/{id}', [AdminController::class, "delete_brand"])->name('admin.brands.delete');
-
+Route::get('/admin/brands/{id}', [AdminController::class, "view_edit_brand"])->name('admin.brands.edit');
+Route::put('/admin/brands/{id}', [AdminController::class, "edit_brand"])->name('admin.brands.edit');
 
 // TODO: redis for caching header
 // TODO: add News page
