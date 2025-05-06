@@ -6,6 +6,9 @@ Vytvorte webovú aplikáciu - eshop, ktorá komplexne rieši nižšie definovan�
 
 ## Diagram fyzického dátového modelu
 
+[![data model](./docs/data_layer.png)](./docs/data_layer.png)
+
+
 - [low fidelity mockups](https://www.figma.com/design/aEwQDwwaRpp2uxGbN7WY8G/WTECH-wireframe?node-id=0-1&t=TnCMdlIpoeTeh7sg-1)
 
 ## Návrhové rozhodnutia
