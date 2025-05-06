@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('collections', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique(); // New & Featured, Men, Women, Kids
-            $table->string('slug', 50)->unique(); // featured, men, women, kids
+            $table->string('name', 50)->unique();
+            $table->string('slug', 50)->unique();
             $table->timestamps();
         });
     }

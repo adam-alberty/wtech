@@ -17,8 +17,6 @@ return new class extends Migration
             $table->text('password_hash');
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->boolean('is_verified')->default(false);
-            $table->string('verification_code', 50)->nullable();
             $table->enum('role', ['admin', 'user'])->default('user');
             $table->timestamps();
         });

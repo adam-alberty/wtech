@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('product_image', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->text('path');
+            $table->string('path', 100)->unique();
             $table->integer('order');
             $table->timestamps();
 
