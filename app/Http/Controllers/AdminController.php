@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -21,7 +23,10 @@ class AdminController extends Controller
     public function view_create_product()
     {
         $brands = Brand::all();
-        return view('admin.products-create')->with('brands', $brands);
+        $colors = Color::all();
+        $sizes = Size::all();
+
+        return view('admin.products-create')->with(['brands' => $brands, 'colors' => $colors, 'sizes' => $sizes]);
     }
 
     // Brands
