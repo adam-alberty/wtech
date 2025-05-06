@@ -1,10 +1,46 @@
-# WTECH E-Shop
+# WTECH E-Shop - Wtech Shoes
 
-Eshop built with Laravel and Postgres.
+## Zadanie
+
+Vytvorte webovú aplikáciu - eshop, ktorá komplexne rieši nižšie definované prípady použitia vo vami zvolenej doméne (napr. elektro, oblečenie, obuv, nábytok). Presný rozsah a konkretizáciu prípadov použitia si dohodnete s vašim vyučujúcim.
+
+## Diagram fyzického dátového modelu
 
 - [low fidelity mockups](https://www.figma.com/design/aEwQDwwaRpp2uxGbN7WY8G/WTECH-wireframe?node-id=0-1&t=TnCMdlIpoeTeh7sg-1)
 
-## Installation
+## Návrhové rozhodnutia
+
+Použili sme Tailwind na zjednodušenie a zjednotenie práce s CSS.
+
+## Programové prostredie
+
+Na lokálny vývoj sme použili `Laravel Sail`. Pre databázu spe Postgres a na cache spe použili Redis.
+
+## Strunčný opis implementácie vybraných prípadov použitia
+
+### zmena množstva pre daný produkt
+
+### prihlásenie
+
+### vyhľadávanie
+
+### pridanie produktu do košíka
+
+### stránkovanie
+
+### základné filtrovanie
+
+## snímky obrazoviek
+
+### detail produktu
+
+### prihlásenie
+
+### homepage
+
+### nákupný košík s vloženým produktom
+
+## Setup
 
 ```sh
 docker run --rm \
@@ -17,4 +53,9 @@ docker run --rm \
 
 ```sh
 ./vendor/bin/sail up
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run build
+./vendor/bin/sail artisan migrate:refresh
 ```
+
+Visit `localhost:80`
