@@ -81,3 +81,16 @@ Route::delete('/admin/categories/{id}', [AdminController::class, "delete_categor
 Route::get('/admin/categories/{id}', [AdminController::class, "view_edit_category"])->name('admin.categories.edit');
 Route::put('/admin/categories/{id}', [AdminController::class, "edit_category"])->name('admin.categories.edit');
 
+Route::get('/admin/sizes', [AdminController::class, 'view_sizes'])->name('admin.sizes');
+Route::get('/admin/sizes/create', [AdminController::class, 'view_create_size'])->name('admin.sizes.create');
+Route::post('/admin/sizes', [AdminController::class, 'create_size'])->name('admin.sizes.store');
+Route::get('/admin/sizes/{id}/edit', [AdminController::class, 'view_edit_size'])->name('admin.sizes.edit');
+Route::put('/admin/sizes/{id}', [AdminController::class, 'edit_size'])->name('admin.sizes.update');
+Route::delete('/admin/sizes/{id}', [AdminController::class, 'delete_size'])->name('admin.sizes.destroy');
+
+Route::get('/admin/colors', [AdminController::class, 'view_colors'])->name('admin.colors');
+Route::get('/admin/colors/create', [AdminController::class, 'view_create_color'])->name('admin.colors.create');
+Route::post('/admin/colors', [AdminController::class, 'create_color'])->name('admin.colors.store');
+Route::get('/admin/colors/{id}/edit', [AdminController::class, 'view_edit_color'])->name('admin.colors.edit');
+Route::put('/admin/colors/{id}', [AdminController::class, 'edit_color'])->name('admin.colors.update');
+Route::delete('/admin/colors/{id}', [AdminController::class, 'delete_color'])->name('admin.colors.destroy');

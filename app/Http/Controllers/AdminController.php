@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -353,5 +354,119 @@ class AdminController extends Controller
             'slug' => Str::slug($validated['name']),
         ]);
         return redirect()->route('admin.categories');
+    }
+
+       public function view_sizes()
+    {
+        $sizes = Size::all();
+        return view('admin.sizes')->with('sizes', $sizes);
+    }
+
+    public function view_create_size()
+    {
+        return view('admin.sizes-create');
+    }
+
+    public function create_size(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:10|unique:sizes,name',
+        ]);
+        Size::create([
+            'name' => $validated['name'],
+        ]);
+        return redirect()->route('admin.sizes');
+    }
+
+    public function delete_size($id)
+    {
+        $size = Size::findOrFail($id);
+        $size->delete();
+        return redirect()->route('admin.sizes');
+    }
+
+    public function view_edit_size($id)
+    {
+        $size = Size::findOrFail($id);
+        return view('admin.sizes-edit')->with('size', $size);
+    }
+
+    public function edit_size(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:10',
+                Rule::unique('sizes', 'name')->ignore($id),
+            ],
+        ]);
+        $size = Size::findOrFail($id);
+        $size->update([
+            'name' => $validated['name'],
+        ]);
+        return redirect()->route('admin.sizes');
+    }
+
+    public function view_colors()
+    {
+        $colors = Color::all();
+        return view('admin.colors')->with('colors', $colors);
+    }
+
+    public function view_create_color()
+    {
+        return view('admin.colors-create');
+    }
+
+    public function create_color(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:20|unique:colors,name',
+            'color_code' => 'required|string|max:10|unique:colors,color_code|regex:/^#[0-9A-Fa-f]{6}$/',
+        ]);
+        Color::create([
+            'name' => $validated['name'],
+            'color_code' => $validated['color_code'],
+        ]);
+        return redirect()->route('admin.colors');
+    }
+
+    public function delete_color($id)
+    {
+        $color = Color::findOrFail($id);
+        $color->delete();
+        return redirect()->route('admin.colors');
+    }
+
+    public function view_edit_color($id)
+    {
+        $color = Color::findOrFail($id);
+        return view('admin.colors-edit')->with('color', $color);
+    }
+
+    public function edit_color(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('colors', 'name')->ignore($id),
+            ],
+            'color_code' => [
+                'required',
+                'string',
+                'max:10',
+                Rule::unique('colors', 'color_code')->ignore($id),
+                'regex:/^#[0-9A-Fa-f]{6}$/',
+            ],
+        ]);
+        $color = Color::findOrFail($id);
+        $color->update([
+            'name' => $validated['name'],
+            'color_code' => $validated['color_code'],
+        ]);
+        return redirect()->route('admin.colors');
     }
 }
