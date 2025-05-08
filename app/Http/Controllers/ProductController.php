@@ -7,6 +7,7 @@ use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\SKU;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +28,10 @@ class ProductController extends Controller
             'id' => $product->id,
             'name' => $product->name,
             'slug' => $product->slug,
-            'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
-            'images' => $product->images->pluck('path')->toArray(),
+            'image' => $product->images->first() ? Storage::url($product->images->first()->path) : '/assets/images/default-image.png',
+            'images' => $product->images->map(function ($image) {
+                return Storage::url($image->path);
+            })->toArray(),
             'link' => "/product/{$product->slug}",
             'price' => $product->price,
             'category' => $product->categories->first()->name ?? 'Uncategorized',
@@ -127,7 +130,7 @@ class ProductController extends Controller
                 $cart[$cartKey] = [
                     'sku_id' => $sku->id,
                     'product_name' => $sku->product->name,
-                    'image' => $sku->product->images->first()->path ?? '/assets/images/default-image.png',
+                    'image' => $sku->product->images->first() ? Storage::url($sku->product->images->first()->path) : '/assets/images/default-image.png',
                     'color_id' => $sku->color_id,
                     'color_name' => $sku->color->name,
                     'size_id' => $sku->size_id,

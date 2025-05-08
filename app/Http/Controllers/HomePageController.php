@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomePageController extends Controller
 {
@@ -11,7 +11,7 @@ class HomePageController extends Controller
     {
         // New Arrivals
         $products = Product::with(['categories', 'images' => function ($query) {
-            $query->where('order', 1);
+            $query->orderBy('order', 'asc')->take(1); // Fetch image with the lowest order
         }])
             ->whereExists(function ($query) {
                 $query->select(\DB::raw(1))
@@ -27,7 +27,7 @@ class HomePageController extends Controller
         $new_arrivals = $products->map(function ($product) {
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
+                'image' => $product->images->first() ? Storage::url($product->images->first()->path) : '/assets/images/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
                 'price' => $product->price ?? 0,
@@ -35,20 +35,20 @@ class HomePageController extends Controller
         })->toArray();
 
         $most_popular_products = Product::with(['categories', 'images' => function ($query) {
-            $query->where('order', 1);
+            $query->orderBy('order', 'asc')->take(1); // Fetch image with the lowest order
         }])
             ->whereExists(function ($query) {
                 $query->select(\DB::raw(1))
-                      ->from('skus')
-                      ->whereColumn('skus.product_id', 'products.id')
-                      ->where('amount_in_stock', '>', 0);
+                    ->from('skus')
+                    ->whereColumn('skus.product_id', 'products.id')
+                    ->where('amount_in_stock', '>', 0);
             })
             ->join('skus', 'products.id', '=', 'skus.product_id')
             ->leftJoin('order_item', 'skus.id', '=', 'order_item.sku_id')
             ->select('products.*')
             ->selectRaw('COALESCE(SUM(order_item.quantity), 0) as total_quantity')
             ->groupBy('products.id', 'products.name', 'products.slug', 'products.created_at',
-                    'products.updated_at', 'products.price', 'products.brand_id')
+                'products.updated_at', 'products.price', 'products.brand_id')
             ->orderBy('total_quantity', 'desc')
             ->orderBy('id', 'desc')
             ->take(4)
@@ -57,7 +57,7 @@ class HomePageController extends Controller
         $most_popular = $most_popular_products->map(function ($product) {
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
+                'image' => $product->images->first() ? Storage::url($product->images->first()->path) : '/assets/images/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
                 'price' => $product->price ?? 0,

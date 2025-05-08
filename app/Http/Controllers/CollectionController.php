@@ -9,6 +9,7 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CollectionController extends Controller
 {
@@ -142,7 +143,7 @@ class CollectionController extends Controller
         $products->through(function ($product) {
             return [
                 'link' => "/product/{$product->slug}",
-                'image' => $product->images->first()->path ?? '/assets/images/default-image.png',
+                'image' => $product->images->first() ? Storage::url($product->images->first()->path) : '/assets/images/default-image.png',
                 'name' => $product->name,
                 'category' => $product->categories->first()->name ?? 'Uncategorized',
                 'price' => $product->price ?? 0,

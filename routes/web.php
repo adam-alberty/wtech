@@ -58,8 +58,13 @@ Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 // Admin
 Route::get('/admin', [AdminController::class, "view_products"])->name('admin');
 
-Route::get('/admin/products', [AdminController::class, "view_products"])->name('admin.products');
-Route::get('/admin/products/create', [AdminController::class, "view_create_product"])->name('admin.products.create');
+Route::get('/admin/products', [AdminController::class, 'view_products'])->name('admin.products');
+Route::get('/admin/products/create', [AdminController::class, 'view_create_product'])->name('admin.products.create');
+Route::post('/admin/products', [AdminController::class, 'create_product'])->name('admin.products.store');
+Route::get('/admin/products/{id}/edit', [AdminController::class, 'view_edit_product'])->name('admin.products.edit');
+Route::put('/admin/products/{id}', [AdminController::class, 'edit_product'])->name('admin.products.update');
+Route::delete('/admin/products/{id}', [AdminController::class, 'delete_product'])->name('admin.products.delete');
+
 
 Route::get('/admin/brands', [AdminController::class, "view_brands"])->name('admin.brands');
 Route::get('/admin/brands/create', [AdminController::class, "view_create_brand"])->name('admin.brands.create');
@@ -76,6 +81,3 @@ Route::delete('/admin/categories/{id}', [AdminController::class, "delete_categor
 Route::get('/admin/categories/{id}', [AdminController::class, "view_edit_category"])->name('admin.categories.edit');
 Route::put('/admin/categories/{id}', [AdminController::class, "edit_category"])->name('admin.categories.edit');
 
-// TODO: redis for caching header
-// TODO: add News page
-// TODO: Clickable items in cart

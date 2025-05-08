@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\Cart;
 use App\Models\DeliveryType;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 trait CheckoutTrait
 {
@@ -23,7 +24,7 @@ trait CheckoutTrait
                     return [
                         'sku_id' => $item->sku_id,
                         'product_name' => $item->sku->product->name,
-                        'image' => $item->sku->product->images->first()->path ?? '/assets/images/default-image.png',
+                        'image' => $item->sku->product->images->first() ? Storage::url($item->sku->product->images->first()->path) : '/assets/images/default-image.png',
                         'color_id' => $item->sku->color_id,
                         'color_name' => $item->sku->color->name,
                         'size_id' => $item->sku->size_id,

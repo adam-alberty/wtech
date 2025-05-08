@@ -9,6 +9,8 @@ class SKU extends Model
     protected $fillable = [
         'product_id',
         'sku',
+        'color_id',
+        'size_id',
         'amount_in_stock'
     ];
 
