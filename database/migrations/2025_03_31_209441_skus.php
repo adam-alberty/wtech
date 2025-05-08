@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('skus', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->string('sku', 20);
+            $table->string('sku', 20)->unique();
             $table->integer('amount_in_stock');
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('size_id');

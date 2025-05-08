@@ -10,6 +10,8 @@ use App\Models\Color;
 use App\Models\Size;
 use App\Models\SKU;
 use App\Models\ProductImage;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -77,13 +79,19 @@ class AdminController extends Controller
             return back()->withErrors(['sku' => 'All SKU fields must be filled.'])->withInput();
         }
 
-        $product = Product::create([
-            'name' => $validated['name'],
-            'slug' => Str::slug($validated['name']),
-            'price' => $validated['price'],
-            'description' => $validated['description'],
-            'brand_id' => $validated['brand_id'],
-        ]);
+        try {
+            $product = Product::create([
+                'name' => $validated['name'],
+                'slug' => Str::slug($validated['name']),
+                'price' => $validated['price'],
+                'description' => $validated['description'],
+                'brand_id' => $validated['brand_id'],
+            ]);
+        } catch (QueryException $e) {
+                $validator = Validator::make($request->all(), []);
+                $validator->errors()->add('product_name', 'A product with this name already exists');
+                return back()->withErrors($validator)->withInput();
+        }
 
         if (!empty($validated['categories'])) {
             $product->categories()->attach($validated['categories']);
@@ -105,13 +113,19 @@ class AdminController extends Controller
         }
 
         foreach ($validated['sku'] as $index => $skuCode) {
-            Sku::create([
-                'product_id' => $product->id,
-                'sku' => $skuCode,
-                'amount_in_stock' => $validated['amount_in_stock'][$index],
-                'color_id' => $validated['color_id'][$index],
-                'size_id' => $validated['size_id'][$index],
-            ]);
+            try {
+                Sku::create([
+                    'product_id' => $product->id,
+                    'sku' => $skuCode,
+                    'amount_in_stock' => $validated['amount_in_stock'][$index],
+                    'color_id' => $validated['color_id'][$index],
+                    'size_id' => $validated['size_id'][$index],
+                ]);
+            } catch (QueryException $e) {
+                    $validator = Validator::make($request->all(), []);
+                    $validator->errors()->add("sku_name", "A sku with this name already exists");
+                    return back()->withErrors($validator)->withInput();
+            }
         }
 
         return redirect()->route('admin.products');
@@ -148,13 +162,19 @@ class AdminController extends Controller
         }
 
         // Update product details
-        $product->update([
-            'name' => $validated['name'],
-            'slug' => Str::slug($validated['name']),
-            'price' => $validated['price'],
-            'description' => $validated['description'],
-            'brand_id' => $validated['brand_id'],
-        ]);
+        try {
+            $product->update([
+                'name' => $validated['name'],
+                'slug' => Str::slug($validated['name']),
+                'price' => $validated['price'],
+                'description' => $validated['description'],
+                'brand_id' => $validated['brand_id'],
+            ]);
+        } catch (QueryException $e) {
+            $validator = Validator::make($request->all(), []);
+            $validator->errors()->add('product_name', 'A product with this name already exists');
+            return back()->withErrors($validator)->withInput();
+        }
 
         $product->categories()->sync($validated['categories'] ?? []);
 
@@ -210,7 +230,13 @@ class AdminController extends Controller
                     ->update($skuData);
             } else {
                 // Create new SKU
-                Sku::create($skuData);
+                try {
+                    Sku::create($skuData);
+                } catch (QueryException $e) {
+                    $validator = Validator::make($request->all(), []);
+                    $validator->errors()->add("sku_name", "A sku with this name already exists");
+                    return back()->withErrors($validator)->withInput();
+                }
             }
         }
 
