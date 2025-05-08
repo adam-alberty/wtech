@@ -47,7 +47,7 @@
 
             <div>
                 <label for="price" class="block mb-1">Price</label>
-                <input type="number" id="price" name="price" placeholder="Enter price (max 999999.99)"
+                <input type="number" id="price" name="price"
                        value="{{ old('price', $product->price) }}" step="0.01" min="0" max="999999.99"
                        class="p-3 rounded-xl border w-full focus:ring-2 ring-primary ring-offset-2 outline-none">
                 @error('price')
