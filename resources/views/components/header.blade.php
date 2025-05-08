@@ -28,6 +28,12 @@
                                 <x-phosphor-sign-out class="w-5 h-5" />
                             </button>
                         </form>
+                        @if(auth()->user()->role === 'admin')
+                            <a aria-label="Go to admin panel" href="{{ route('admin.products') }}"
+                               class="p-2 rounded-full hover:bg-input focus:bg-input">
+                                <x-phosphor-gear class="w-5 h-5" />
+                            </a>
+                        @endif
                     </div>
                 @else
                     <a aria-label="Go to my account" href="{{ route('login') }}"
@@ -57,6 +63,32 @@
                     <x-phosphor-x class="w-6 h-6" />
                 </button>
             </div>
+            <nav class="flex flex-col p-5 gap-3">
+                @foreach($collections as $collection)
+                    <a href="{{ route('collection', $collection->slug) }}"
+                       class="hover:text-gray-500 py-2 transition-colors">
+                        {{ $collection->name }}
+                    </a>
+                @endforeach
+                @auth
+                    <div class="flex flex-col gap-3 mt-3">
+                        <span>{{ auth()->user()->email }}</span>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-left hover:text-gray-500 py-2">Log out</button>
+                        </form>
+                        @if(auth()->user()->role === 'admin')
+                            <a href="{{ route('admin.products') }}"
+                               class="hover:text-gray-500 py-2">Admin Panel</a>
+                        @endif
+                    </div>
+                @else
+                    <a href="{{ route('login') }}"
+                       class="hover:text-gray-500 py-2">Log in</a>
+                @endauth
+                <a href="{{ route('checkout') }}"
+                   class="hover:text-gray-500 py-2">Shopping Cart</a>
+            </nav>
         </div>
     </div>
 </header>

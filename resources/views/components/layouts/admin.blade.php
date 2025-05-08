@@ -31,14 +31,11 @@
                         </li>
                     </ul>
                 </div>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" aria-label="Log out"
-                        class="flex w-full gap-2 p-3 cursor-pointer bg-red-400 text-white">
-                        <x-phosphor-sign-out class="w-5 h-5" />
-                        Log out
-                    </button>
-                </form>
+                <a href="{{ route('home') }}" aria-label="Exit admin panel"
+                   class="flex w-full gap-2 p-3 cursor-pointer bg-red-400 text-white">
+                    <x-phosphor-sign-out class="w-5 h-5" />
+                    Exit admin panel
+                </a>
             </nav>
         </aside>
         <div>
