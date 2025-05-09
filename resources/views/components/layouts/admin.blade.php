@@ -41,6 +41,12 @@
                                 'bg-muted' => Route::currentRouteName() == 'admin.colors',
                             ])>Colors</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.collections') }}" @class([
+                                'p-2 block',
+                                'bg-muted' => Route::currentRouteName() == 'admin.collections',
+                            ])>Collections</a>
+                        </li>
                     </ul>
                 </div>
                 <a href="{{ route('home') }}" aria-label="Exit admin panel"

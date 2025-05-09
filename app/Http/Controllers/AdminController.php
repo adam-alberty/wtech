@@ -11,6 +11,7 @@ use App\Models\Size;
 use App\Models\SKU;
 use App\Models\ProductImage;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -469,4 +470,62 @@ class AdminController extends Controller
         ]);
         return redirect()->route('admin.colors');
     }
+
+        public function view_collections()
+    {
+        $collections = Collection::all();
+        return view('admin.collections')->with('collections', $collections);
+    }
+
+    public function view_create_collection()
+    {
+        return view('admin.collections-create');
+    }
+
+    public function create_collection(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:50|unique:collections,name',
+        ]);
+        Collection::create([
+            'name' => $validated['name'],
+            'slug' => Str::slug($validated['name']),
+        ]);
+        Cache::forget('header_collections');
+        return redirect()->route('admin.collections');
+    }
+
+    public function delete_collection($id)
+    {
+        $collection = Collection::findOrFail($id);
+        $collection->delete();
+        Cache::forget('header_collections');
+        return redirect()->route('admin.collections');
+    }
+
+    public function view_edit_collection($id)
+    {
+        $collection = Collection::findOrFail($id);
+        return view('admin.collections-edit')->with('collection', $collection);
+    }
+
+    public function edit_collection(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('collections', 'name')->ignore($id),
+            ],
+        ]);
+        $collection = Collection::findOrFail($id);
+        $collection->update([
+            'name' => $validated['name'],
+            'slug' => Str::slug($validated['name']),
+        ]);
+        Cache::forget('header_collections');
+        return redirect()->route('admin.collections');
+    }
+
 }

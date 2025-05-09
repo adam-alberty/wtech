@@ -94,3 +94,10 @@ Route::post('/admin/colors', [AdminController::class, 'create_color'])->name('ad
 Route::get('/admin/colors/{id}/edit', [AdminController::class, 'view_edit_color'])->name('admin.colors.edit')->middleware(['admin']);
 Route::put('/admin/colors/{id}', [AdminController::class, 'edit_color'])->name('admin.colors.update')->middleware(['admin']);
 Route::delete('/admin/colors/{id}', [AdminController::class, 'delete_color'])->name('admin.colors.destroy')->middleware(['admin']);
+
+Route::get('/admin/collections', [AdminController::class, 'view_collections'])->name('admin.collections')->middleware(['admin']);
+Route::get('/admin/collections/create', [AdminController::class, 'view_create_collection'])->name('admin.collections.create')->middleware(['admin']);
+Route::post('/admin/collections', [AdminController::class, 'create_collection'])->name('admin.collections.store')->middleware(['admin']);
+Route::get('/admin/collections/{id}/edit', [AdminController::class, 'view_edit_collection'])->name('admin.collections.edit')->middleware(['admin']);
+Route::put('/admin/collections/{id}', [AdminController::class, 'edit_collection'])->name('admin.collections.update')->middleware(['admin']);
+Route::delete('/admin/collections/{id}', [AdminController::class, 'delete_collection'])->name('admin.collections.destroy')->middleware(['admin']);
