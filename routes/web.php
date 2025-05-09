@@ -56,41 +56,41 @@ Route::view('/terms-of-use', 'info.terms_of_use')->name('terms_of_use');
 
 
 // Admin
-Route::get('/admin', [AdminController::class, "view_products"])->name('admin');
+Route::get('/admin', [AdminController::class, "view_products"])->name('admin')->middleware(['admin']);
 
-Route::get('/admin/products', [AdminController::class, 'view_products'])->name('admin.products');
-Route::get('/admin/products/create', [AdminController::class, 'view_create_product'])->name('admin.products.create');
-Route::post('/admin/products', [AdminController::class, 'create_product'])->name('admin.products.store');
-Route::get('/admin/products/{id}/edit', [AdminController::class, 'view_edit_product'])->name('admin.products.edit');
-Route::put('/admin/products/{id}', [AdminController::class, 'edit_product'])->name('admin.products.update');
-Route::delete('/admin/products/{id}', [AdminController::class, 'delete_product'])->name('admin.products.delete');
-
-
-Route::get('/admin/brands', [AdminController::class, "view_brands"])->name('admin.brands');
-Route::get('/admin/brands/create', [AdminController::class, "view_create_brand"])->name('admin.brands.create');
-Route::post('/admin/brands/create', [AdminController::class, "create_brand"])->name('admin.brands.store');
-Route::delete('/admin/brands/{id}', [AdminController::class, "delete_brand"])->name('admin.brands.delete');
-Route::get('/admin/brands/{id}', [AdminController::class, "view_edit_brand"])->name('admin.brands.edit');
-Route::put('/admin/brands/{id}', [AdminController::class, "edit_brand"])->name('admin.brands.edit');
+Route::get('/admin/products', [AdminController::class, 'view_products'])->name('admin.products')->middleware(['admin']);
+Route::get('/admin/products/create', [AdminController::class, 'view_create_product'])->name('admin.products.create')->middleware(['admin']);
+Route::post('/admin/products', [AdminController::class, 'create_product'])->name('admin.products.store')->middleware(['admin']);
+Route::get('/admin/products/{id}/edit', [AdminController::class, 'view_edit_product'])->name('admin.products.edit')->middleware(['admin']);
+Route::put('/admin/products/{id}', [AdminController::class, 'edit_product'])->name('admin.products.update')->middleware(['admin']);
+Route::delete('/admin/products/{id}', [AdminController::class, 'delete_product'])->name('admin.products.delete')->middleware(['admin']);
 
 
-Route::get('/admin/categories', [AdminController::class, "view_categories"])->name('admin.categories');
-Route::get('/admin/categories/create', [AdminController::class, "view_create_category"])->name('admin.categories.create');
-Route::post('/admin/categories/create', [AdminController::class, "create_category"])->name('admin.categories.store');
-Route::delete('/admin/categories/{id}', [AdminController::class, "delete_category"])->name('admin.categories.delete');
-Route::get('/admin/categories/{id}', [AdminController::class, "view_edit_category"])->name('admin.categories.edit');
-Route::put('/admin/categories/{id}', [AdminController::class, "edit_category"])->name('admin.categories.edit');
+Route::get('/admin/brands', [AdminController::class, "view_brands"])->name('admin.brands')->middleware(['admin']);
+Route::get('/admin/brands/create', [AdminController::class, "view_create_brand"])->name('admin.brands.create')->middleware(['admin']);
+Route::post('/admin/brands/create', [AdminController::class, "create_brand"])->name('admin.brands.store')->middleware(['admin']);
+Route::delete('/admin/brands/{id}', [AdminController::class, "delete_brand"])->name('admin.brands.delete')->middleware(['admin']);
+Route::get('/admin/brands/{id}', [AdminController::class, "view_edit_brand"])->name('admin.brands.edit')->middleware(['admin']);
+Route::put('/admin/brands/{id}', [AdminController::class, "edit_brand"])->name('admin.brands.edit')->middleware(['admin']);
 
-Route::get('/admin/sizes', [AdminController::class, 'view_sizes'])->name('admin.sizes');
-Route::get('/admin/sizes/create', [AdminController::class, 'view_create_size'])->name('admin.sizes.create');
-Route::post('/admin/sizes', [AdminController::class, 'create_size'])->name('admin.sizes.store');
-Route::get('/admin/sizes/{id}/edit', [AdminController::class, 'view_edit_size'])->name('admin.sizes.edit');
-Route::put('/admin/sizes/{id}', [AdminController::class, 'edit_size'])->name('admin.sizes.update');
-Route::delete('/admin/sizes/{id}', [AdminController::class, 'delete_size'])->name('admin.sizes.destroy');
 
-Route::get('/admin/colors', [AdminController::class, 'view_colors'])->name('admin.colors');
-Route::get('/admin/colors/create', [AdminController::class, 'view_create_color'])->name('admin.colors.create');
-Route::post('/admin/colors', [AdminController::class, 'create_color'])->name('admin.colors.store');
-Route::get('/admin/colors/{id}/edit', [AdminController::class, 'view_edit_color'])->name('admin.colors.edit');
-Route::put('/admin/colors/{id}', [AdminController::class, 'edit_color'])->name('admin.colors.update');
-Route::delete('/admin/colors/{id}', [AdminController::class, 'delete_color'])->name('admin.colors.destroy');
+Route::get('/admin/categories', [AdminController::class, "view_categories"])->name('admin.categories')->middleware(['admin']);
+Route::get('/admin/categories/create', [AdminController::class, "view_create_category"])->name('admin.categories.create')->middleware(['admin']);
+Route::post('/admin/categories/create', [AdminController::class, "create_category"])->name('admin.categories.store')->middleware(['admin']);
+Route::delete('/admin/categories/{id}', [AdminController::class, "delete_category"])->name('admin.categories.delete')->middleware(['admin']);
+Route::get('/admin/categories/{id}', [AdminController::class, "view_edit_category"])->name('admin.categories.edit')->middleware(['admin']);
+Route::put('/admin/categories/{id}', [AdminController::class, "edit_category"])->name('admin.categories.edit')->middleware(['admin']);
+
+Route::get('/admin/sizes', [AdminController::class, 'view_sizes'])->name('admin.sizes')->middleware(['admin']);
+Route::get('/admin/sizes/create', [AdminController::class, 'view_create_size'])->name('admin.sizes.create')->middleware(['admin']);
+Route::post('/admin/sizes', [AdminController::class, 'create_size'])->name('admin.sizes.store')->middleware(['admin']);
+Route::get('/admin/sizes/{id}/edit', [AdminController::class, 'view_edit_size'])->name('admin.sizes.edit')->middleware(['admin']);
+Route::put('/admin/sizes/{id}', [AdminController::class, 'edit_size'])->name('admin.sizes.update')->middleware(['admin']);
+Route::delete('/admin/sizes/{id}', [AdminController::class, 'delete_size'])->name('admin.sizes.destroy')->middleware(['admin']);
+
+Route::get('/admin/colors', [AdminController::class, 'view_colors'])->name('admin.colors')->middleware(['admin']);
+Route::get('/admin/colors/create', [AdminController::class, 'view_create_color'])->name('admin.colors.create')->middleware(['admin']);
+Route::post('/admin/colors', [AdminController::class, 'create_color'])->name('admin.colors.store')->middleware(['admin']);
+Route::get('/admin/colors/{id}/edit', [AdminController::class, 'view_edit_color'])->name('admin.colors.edit')->middleware(['admin']);
+Route::put('/admin/colors/{id}', [AdminController::class, 'edit_color'])->name('admin.colors.update')->middleware(['admin']);
+Route::delete('/admin/colors/{id}', [AdminController::class, 'delete_color'])->name('admin.colors.destroy')->middleware(['admin']);
