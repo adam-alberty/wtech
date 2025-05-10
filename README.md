@@ -17,7 +17,7 @@ Použili sme Tailwind na zjednodušenie a zjednotenie práce s CSS.
 
 ## Programové prostredie
 
-Na lokálny vývoj sme použili `Laravel Sail`. Pre databázu spe Postgres a na cache spe použili Redis.
+Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili Postgres a na cache sme použili Redis.
 
 ## Strunčný opis implementácie vybraných prípadov použitia
 
@@ -37,13 +37,27 @@ Na lokálny vývoj sme použili `Laravel Sail`. Pre databázu spe Postgres a na 
 
 ### detail produktu
 
+![Product detail](./docs/screenshots/product-detail.png)
+
 ### prihlásenie
+
+![Login](./docs/screenshots/login.png)
 
 ### homepage
 
+![Homepage](./docs/screenshots/homepage.png)
+
 ### nákupný košík s vloženým produktom
 
+![Cart](./docs/screenshots/cart.png)
+
 ## Setup
+
+Instructions for setting up the development environment. **Docker** and **Docker compose** must be installed on the system.
+
+```sh
+git clone https://github.com/adam-alberty/wtech
+```
 
 ```sh
 docker run --rm \
@@ -61,4 +75,4 @@ docker run --rm \
 ./vendor/bin/sail artisan migrate:refresh
 ```
 
-Visit `localhost:80`
+Visit `http://localhost:80`
