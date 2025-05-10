@@ -8,12 +8,13 @@ Vytvorte webovú aplikáciu - eshop, ktorá komplexne rieši nižšie definovan�
 
 [![data model](./docs/data_model.png)](./docs/data_model.png)
 
-
 - [low fidelity mockups](https://www.figma.com/design/aEwQDwwaRpp2uxGbN7WY8G/WTECH-wireframe?node-id=0-1&t=TnCMdlIpoeTeh7sg-1)
 
 ## Návrhové rozhodnutia
 
 Použili sme Tailwind na zjednodušenie a zjednotenie práce s CSS.
+
+Produkty majú atribúty *size* a *color* a môžu patriť do viacerých kategórií.
 
 ## Programové prostredie
 
