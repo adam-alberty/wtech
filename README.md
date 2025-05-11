@@ -28,6 +28,47 @@ Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili **P
 
 ### prihlásenie
 
+Na autentifikáciu sa používa `Illuminate\Support\Facades\Auth`.
+
+Prihlásenie používateľa:
+
+```php
+$credentials = $request->only('email', 'password');
+if (Auth::attempt($credentials)) {
+    $this->syncSessionToDatabase();
+    return redirect()->intended('/');
+}
+```
+
+Pri registrácii sa najprv validujú dáta požiadavky, vytvorí sa používateľ, vytvorí sa auth session a redirectne sa.
+
+```php
+public function registerPost(Request $request)
+{
+    $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    // create user
+    $user = User::create([
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'email' => $request->email,
+        'password_hash' => Hash::make($request->password),
+    ]);
+    // autologin after registration
+    Auth::login($user);
+
+
+    $this->syncSessionToDatabase();
+
+    return redirect('/');
+}
+```
+
 ### vyhľadávanie
 
 Používateľ napíše do vyhľadávacieho poľa query a po odoslaní sa spraví redirect na `/collections?query=...`.
@@ -44,7 +85,80 @@ Využíva sa `ILIKE` v Postgres. Pre robustnejšie vyhľadávanie sa dá použi�
 
 ### pridanie produktu do košíka
 
+Ak používateľ ešte nemá cart v session, tak sa vytvorí. Snippet nižšie je pre guest používateľa:
+
+```php
+    $quantity = $request->quantity;
+    $cart_key = 'sku_' . $request->sku_id;
+
+    $cart = session()->get('cart', []);
+    if (isset($cart[$cart_key])) {
+        if ($quantity <= 0) {
+            unset($cart[$cart_key]);
+        } else {
+            $cart[$cart_key]['quantity'] = $quantity;
+        }
+        session()->put('cart', $cart);
+    } else {
+        return redirect()->route('checkout')
+            ->with('error', 'Item not found in cart.');
+    }
+```
+
+Pre autentizovaného používateľa je podobná logika s tým, že cart je uložený aj v databáze.
+
 ### stránkovanie
+
+Stránkovanie je implementované pomocou integrovaného paginátora v Eloquent ORM.
+
+```php
+$products = $products_query->paginate(12);
+```
+
+Vo `collection view` je implementované stránkovanie nasledovne:
+
+```php
+<div class="mt-10 flex justify-center items-center gap-2 flex-wrap">
+    @if ($products->onFirstPage())
+        <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">First</span>
+    @else
+        <a href="{{ $products->url(1) }}"
+            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">First</a>
+    @endif
+
+    @php
+        $currentPage = $products->currentPage();
+        $lastPage = $products->lastPage();
+        $range = 2;
+        $start = max(1, $currentPage - $range);
+        $end = min($lastPage, $currentPage + $range);
+
+        if ($end - $start < 4) {
+            if ($currentPage <= $range + 1) {
+                $end = min(5, $lastPage);
+            } else {
+                $start = max(1, $lastPage - 4);
+            }
+        }
+    @endphp
+
+    @for ($i = $start; $i <= $end; $i++)
+        @if ($i === $currentPage)
+            <span class="px-4 py-2 bg-gray-700 text-white rounded font-bold">{{ $i }}</span>
+        @else
+            <a href="{{ $products->url($i) }}"
+                class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">{{ $i }}</a>
+        @endif
+    @endfor
+
+    @if ($products->onLastPage())
+        <span class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">Last</span>
+    @else
+        <a href="{{ $products->url($products->lastPage()) }}"
+            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Last</a>
+    @endif
+</div>
+```
 
 ### základné filtrovanie
 
