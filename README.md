@@ -229,9 +229,9 @@ docker run --rm \
 
 ```sh
 ./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate:refresh --seed
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run build
-./vendor/bin/sail artisan migrate --seed
 ```
 
 Visit `http://localhost:80`
