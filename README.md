@@ -12,13 +12,15 @@ Vytvorte webovú aplikáciu - eshop, ktorá komplexne rieši nižšie definovan�
 
 ## Návrhové rozhodnutia
 
-Použili sme Tailwind na zjednodušenie a zjednotenie práce s CSS.
+Použili sme **Tailwind** kvôli zjednodušeniu a zjednoteniu práce s CSS.
 
 Produkty majú atribúty *size* a *color* a môžu patriť do viacerých kategórií.
 
+Produkty taktiež patria do *collection* ako napríklad "Muži", "Ženy". Vďaka tomu môžeme pridávať produkty do limitovaných kolekcií, ako napríklad "Winter Sale".
+
 ## Programové prostredie
 
-Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili Postgres a na cache sme použili Redis.
+Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili **Postgres** a na cache sme použili **Redis**.
 
 ## Strunčný opis implementácie vybraných prípadov použitia
 
@@ -27,6 +29,18 @@ Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili Pos
 ### prihlásenie
 
 ### vyhľadávanie
+
+Používateľ napíše do vyhľadávacieho poľa query a po odoslaní sa spraví redirect na `/collections?query=...`.
+
+Produkty sa vyfiltrujú v `CollectionController` následovne:
+
+```php
+if ($query) {
+    $products_query->where('products.name', 'ILIKE', '%' . $query . '%');
+}
+```
+
+Využíva sa `ILIKE` v Postgres. Pre robustnejšie vyhľadávanie sa dá použiť aj napríklad Meilisearch.
 
 ### pridanie produktu do košíka
 
@@ -52,7 +66,7 @@ Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili Pos
 
 ![Cart](./docs/screenshots/cart.png)
 
-## Setup
+## Development Setup
 
 Instructions for setting up the development environment. **Docker** and **Docker compose** must be installed on the system.
 
