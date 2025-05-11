@@ -26,6 +26,16 @@ Na lokálny vývoj sme použili **Laravel Sail**. Pre databázu sme použili **P
 
 ### zmena množstva pre daný produkt
 
+Pri vytvorení objednávky sa dekrementuje kvantita konkrétneho produktu (vytvorenie objdenávky a dekrementácia kvanity sa vykonáva v DB transakcii).
+
+```php
+if ($item['sku_id']) {
+    SKU::findOrFail($item['sku_id'])->decrement('amount_in_stock', $item['quantity']);
+}
+```
+
+Zmena množstva sa dá vykonať aj v admin rozhraní.
+
 ### prihlásenie
 
 Na autentifikáciu sa používa `Illuminate\Support\Facades\Auth`.
@@ -115,7 +125,7 @@ Stránkovanie je implementované pomocou integrovaného paginátora v Eloquent O
 $products = $products_query->paginate(12);
 ```
 
-Vo `collection view` je implementované stránkovanie nasledovne:
+V collection view je implementované stránkovanie nasledovne:
 
 ```php
 <div class="mt-10 flex justify-center items-center gap-2 flex-wrap">
@@ -161,6 +171,26 @@ Vo `collection view` je implementované stránkovanie nasledovne:
 ```
 
 ### základné filtrovanie
+
+Pri filtrovaní sa berú atribúty ako *brand*, *color*, *size*, *category*,... z query string-u požiadavky.
+
+```php
+$selected_category = request()->query('category');
+$selected_brands = array_filter((array) request()->query('brand', []));
+$selected_colors = array_filter((array) request()->query('color', []));
+$selected_sizes = array_filter((array) request()->query('size', []));
+$price_from = request()->query('price_from');
+$price_to = request()->query('price_to');
+$sort = request()->query('sort', 'top');
+```
+
+Následne sa produkty filtrujú podľa týchto atribútov. Napríklad filtrovanie podľa značiek vyzerá takto:
+
+```php
+if (!empty($selected_brands)) {
+    $products_query->whereIn('brand_id', $selected_brands);
+}
+```
 
 ## snímky obrazoviek
 
