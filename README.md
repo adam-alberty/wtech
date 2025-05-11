@@ -231,7 +231,9 @@ docker run --rm \
 ./vendor/bin/sail up
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run build
-./vendor/bin/sail artisan migrate:refresh
+./vendor/bin/sail artisan migrate --seed
 ```
 
 Visit `http://localhost:80`
+
+Prístupy pre 2 testovacích používateľov: user@gmail.com a admin@gmail.com. Heslá: 12345678
